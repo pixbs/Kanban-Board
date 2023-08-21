@@ -1,7 +1,7 @@
 // This widget will open an Iframe window with buttons to show a toast message and close the window.
 
 const { widget } = figma
-const { useEffect, useSyncedMap, Text, AutoLayout, SVG } = widget
+const { useEffect, useSyncedMap, useSyncedState, Text, AutoLayout, SVG } = widget
 
 const defaultIconSrc = `
 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none">
@@ -18,25 +18,26 @@ const defaultIconSrc = `
 `
 
 interface Card {
-  id: number,
+  readonly id: string,
   name: string,
-  description: string,
-  node: SceneNode | null,
-  date: Date
-  assignee: BaseUser | null
+  description: string | undefined,
+  nodeId: string | undefined,
+  date: Date | undefined,
+  assignee: BaseUser | undefined
+}
+
+interface message {
+  type: "card" | "users",
+  content: any
 }
 
 const testCard: Card = {
-  id: 1,
+  id: "1",
   name: "Test Card",
   description: "This is a test card",
-  node: null,
+  nodeId: undefined,
   date: new Date(),
-  assignee: null
-}
-
-function test(){
-  
+  assignee: undefined
 }
 
 function Widget() {
@@ -73,13 +74,11 @@ function Widget() {
 
 function CardNode(card: Card = testCard) {
 
+  const [name, setName] = useSyncedState(card.id+'-name', card.name)
   useEffect(() => {
     figma.ui.onmessage = (msg) => {
-      if (msg.type === 'showToast') {
-        figma.notify('Hello widget')
-      }
-      if (msg.type === 'close') {
-        figma.closePlugin()
+      if (msg.type === 'name') {
+        setName(msg.content)
       }
     }
   })
@@ -90,25 +89,36 @@ function CardNode(card: Card = testCard) {
       direction='vertical' 
       onClick={
         () => new Promise(
-          (resolve) => figma.showUI(__html__)
+          (resolve) => {
+            const cardMessage : message = {
+              type: "card",
+              content: card
+            }
+            const usersMessage : message = {
+              type: "users",
+              content: [
+                {id: 1, name: "User 1"},
+                {id: 2, name: "User 2"},
+                {id: 3, name: "User 3"},
+                {id: 4, name: "User 4"},
+              ]
+            }
+            figma.showUI(__html__)
+            figma.ui.postMessage(cardMessage)
+            figma.ui.postMessage(usersMessage)
+          }
         )
       }
     >
       <Text>
-        {card.name}
+        {name}
       </Text>
       <SVG src={defaultIconSrc} tooltip={card.description}/>
       <Text>
-        {card.date.toLocaleDateString()}
+        {card.date?.toLocaleDateString()}
       </Text>
     </AutoLayout>
   )
-}
-
-function dateToHtml(date: Date){
-  var day = ("0" + date.getDate()).slice(-2)
-  var month = ("0" + (date.getMonth() + 1)).slice(-2)
-  return date.getFullYear()+"-"+(month)+"-"+(day)
 }
 
 widget.register(CardNode)
