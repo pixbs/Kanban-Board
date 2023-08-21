@@ -1,5 +1,5 @@
 {
-  "name": "kanban-board",
+  "name": "Kanban Board",
   "id": "1273992989430283111",
   "api": "1.0.0",
   "main": "dist/code.js",
@@ -12,7 +12,7 @@
   "permissions": ["currentuser"],
   "containsWidget": true,
   "widgetApi": "1.0.0",
-  "ui": "ui.html",
+  "ui": "./dist/index.html",
   "networkAccess": {
     "allowedDomains": [
       "https://s3-alpha.figma.com"

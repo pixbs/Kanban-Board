@@ -6,3 +6,27 @@ node_modules
 out/
 dist/
 code.js
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/widget-ui/node_modules
+/widget-ui/.pnp
+/widget-ui/.pnp.js
+
+# testing
+/widget-ui/coverage
+
+# production
+/widget-ui/build
+
+# misc
+/widget-ui/.DS_Store
+/widget-ui/.env.local
+/widget-ui/.env.development.local
+/widget-ui/.env.test.local
+/widget-ui/.env.production.local
+
+/widget-ui/npm-debug.log*
+/widget-ui/yarn-debug.log*
+/widget-ui/yarn-error.log*
