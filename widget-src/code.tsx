@@ -16,13 +16,14 @@ const defaultIconSrc = `
 </defs>
 </svg>
 `
+const root = figma.root
 
 interface Card {
-  readonly id: string,
+  id: string,
   name: string,
   description: string | undefined,
   nodeId: string | undefined,
-  date: Date | undefined,
+  date: string | undefined,
   assignee: BaseUser | undefined
 }
 
@@ -32,60 +33,60 @@ interface message {
 }
 
 const testCard: Card = {
+  id: "0",
+  name: "Test Card",
+  description: "This is a test card",
+  nodeId: undefined,
+  date: "2015-03-25",
+  assignee: undefined
+}
+const testCard2: Card = {
   id: "1",
   name: "Test Card",
   description: "This is a test card",
   nodeId: undefined,
-  date: new Date(),
+  date: "2015-03-25",
   assignee: undefined
 }
 
-function Widget() {
-  const cardMap = useSyncedMap<Card>('cards')
+function Column() {
+  const filePluginDataKeys = root.getPluginDataKeys()
+  const columnMap = useSyncedMap("cards")
+  if(!filePluginDataKeys.includes("cards")) {
+    root.setPluginData("cards", JSON.stringify([testCard,testCard2]))
+  }
 
   useEffect(() => {
     figma.ui.onmessage = (msg) => {
-      if (msg.type === 'showToast') {
-        figma.notify('Hello widget')
-      }
-      if (msg.type === 'close') {
-        figma.closePlugin()
+      if (msg.type === "card") {
+        columnMap.set(msg.content.id, msg.content)
       }
     }
   })
 
-  return (
-    <Text
-      fontSize={24}
-      onClick={
-        // Use async callbacks or return a promise to keep the Iframe window
-        // opened. Resolving the promise, closing the Iframe window, or calling
-        // "figma.closePlugin()" will terminate the code.
-        () =>
-          new Promise((resolve) => {
-            figma.showUI(__html__)
-          })
-      }
-    >
-      Open IFrame
-    </Text>
-  )
+  console.log(columnMap.keys())
+  const cards = JSON.parse(root.getPluginData("cards")) as Card[]
+
+  return <AutoLayout>
+    {cards.map((card) => CardNode(card.id))}
+  </AutoLayout>
 }
 
-function CardNode(card: Card = testCard) {
+function CardNode(id : string) {
+  const filePluginDataKeys = root.getPluginDataKeys()
+  if(!filePluginDataKeys.includes(id)) {
+    root.setPluginData(id, JSON.stringify(testCard))
+  }
 
-  const [name, setName] = useSyncedState(card.id+'-name', card.name)
-  useEffect(() => {
-    figma.ui.onmessage = (msg) => {
-      if (msg.type === 'name') {
-        setName(msg.content)
-      }
-    }
-  })
+  const columnMap = useSyncedMap("cards")
+  const card = columnMap.get(id) as Card || JSON.parse(root.getPluginData(id))
+  if (!card) return
+  card.id = id
 
   return (
     <AutoLayout 
-      name={card.id+" card"} 
+      name={card.id+" card"}
+      key={card.id+" card"}
       direction='vertical' 
       onClick={
         () => new Promise(
@@ -111,14 +112,14 @@ function CardNode(card: Card = testCard) {
       }
     >
       <Text>
-        {name}
+        {card.name}
       </Text>
       <SVG src={defaultIconSrc} tooltip={card.description}/>
       <Text>
-        {card.date?.toLocaleDateString()}
+        {card.date}
       </Text>
     </AutoLayout>
   )
 }
 
-widget.register(CardNode)
+widget.register(Column)

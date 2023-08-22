@@ -22,82 +22,90 @@ interface Card {
     name: string,
     description: string | undefined,
     nodeId: string | undefined,
-    date: Date | undefined,
+    date: string | undefined,
     assignee: BaseUser | undefined
 }
 
 var users : BaseUser[]
 var card : Card
 
+function IFrame() : JSX.Element {
+
+    return (
+        <>
+            <Input type="test" value={card.name} property="name"/>
+            <Input type="text" value={card.description} property="description"/>
+            <Input type="date" value={card.date} property="date"/>
+            <Select value={card.assignee?.id} options={users}/>
+        </>
+    )
+}
+
+function Input(props) : JSX.Element {
+
+    const type = props.type
+    const [value, setValue] = useState(props.value)
+    const property : "name" | "description" | "date" = props.property
+
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' && !event.shiftKey || event.key === 'Escape') {
+            event.target.blur()
+        }
+    }
+
+    const handleChange = (event) => {
+        setValue(event.target.value)
+    }
+    
+    const handleBlur = (event) => {
+        card[property] = event.target.value
+        parent.postMessage({pluginMessage: {type: card, content: card}}, '*')
+    }
+
+    return (
+        <textarea
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+        />
+        )
+}
+
+function Select(props) : JSX.Element {
+    
+    const [value, setValue] = useState<number>(props.value)
+    const options : BaseUser[] = props.options
+    
+    const handleChange = (event) => {
+        setValue(event.target.value)
+    }
+
+
+    
+    return (
+        <select
+        value={value}
+        onChange={handleChange}
+        >
+            {options?.map( user => (
+                <option key={user.id}>{user.name}</option>)
+                )}
+        </select>
+        )
+}
+
 onmessage = event => {
     const message = event.data.pluginMessage as Message
     switch (message.type) {
         case "card":
             card = message.content as Card
-            root.render(App())
+            root.render(IFrame())
             break;
         case "users":
             users = message.content as BaseUser[]
-            root.render(App())
+            root.render(IFrame())
             break;
     }
-
-    console.log(JSON.stringify(event.data) + " recived from figma")
-    
-}
-
-function App() : JSX.Element {
-
-    return (
-        <>
-            <NameInput />
-            <select>
-                {users?.map( user => (
-                    <option key={user.id}>{user.name}</option>)
-                )}
-            </select>
-            <input type="text" value={card.description}/>
-            <input type="date"/>
-        </>
-    )
-}
-
-function NameInput() {
-    const [name, setName] = useState("")
-
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const value = event.target.value
-        setName(value)
-        parent.postMessage({pluginMessage: {type: "name", content: value}}, '*')
-    }
-
-    return (
-        <input type="text" value={name} onChange={handleChange}/>
-    )
-}
-
-class CardForm extends React.Component {
-    render() {
-        return (
-            <div>
-                <input type="text" value={card.name}/>
-                <select>
-                    {users?.map( user => (
-                        <option key={user.id}>{user.name}</option>)
-                    )}
-                </select>
-                <input type="text" value={card.description}/>
-                <input type="date"/>
-            </div>
-        )
-    }
-}
-
-function dateToHtml(date: Date | undefined){
-    if(!date){
-        return
-    }
-    var day = ("0" + date.getDate()).slice(-2)
-    var month = ("0" + (date.getMonth() + 1)).slice(-2)
-    return date.getFullYear()+"-"+(month)+"-"+(day)
 }
