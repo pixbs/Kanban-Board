@@ -13,22 +13,24 @@ export function Column({name} : {name: string}) {
     const [column, setColumn] = useSyncedState<string[]>(name+"-column", JSON.parse(root.getPluginData(name+"-column")))
 
     var counter = column.length
+
+    const clickHandler = () => {
+        const newColumn = [...column]
+        newColumn.push(GenerateUUID())
+        counter++
+        setColumn(newColumn)
+        root.setPluginData(name+"-column", JSON.stringify(newColumn))
+    }
     
     return (
         <AutoLayout
         direction="vertical"
-        padding={8}
+        spacing={8}
         >
             <Text>{name}</Text>
             {column.map((id) => <CardNode id={id}/>)}
             <Text
-            onClick={() => {
-                const newColumn = [...column]
-                newColumn.push(GenerateUUID())
-                counter++
-                setColumn(newColumn)
-                root.setPluginData(name+"-column", JSON.stringify(newColumn))
-            }}
+            onClick={clickHandler}
             >Add card</Text>
         </AutoLayout>
         )

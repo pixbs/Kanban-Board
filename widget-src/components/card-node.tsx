@@ -1,5 +1,5 @@
 const { widget } = figma
-const { useSyncedState, AutoLayout, Text } = widget
+const { useSyncedState, AutoLayout, Text, useEffect } = widget
 import {Card, Message} from "../interfaces/index"
 
 const root = figma.root
@@ -15,17 +15,34 @@ const baseCard : Card = {
 export function CardNode({id} : {id: string}) {
 
     const filePluginDataKeys = root.getPluginDataKeys()
-    if(!filePluginDataKeys.includes(id+"-card")) {
-        root.setPluginData(id+"-card", JSON.stringify(baseCard))
+    if(!filePluginDataKeys.includes(id)) {
+        root.setPluginData(id, JSON.stringify(baseCard))
     }
-    const [card, setCard] = useSyncedState<Card>(id+"-card", JSON.parse(root.getPluginData(id+"-card")))
-    console.log(id+"-card")
-    console.log(root.getPluginData(id+"-card"))
+    const [card, setCard] = useSyncedState<Card>(id, JSON.parse(root.getPluginData(id)))
+
+    useEffect(() => {
+        figma.ui.onmessage = (message) => {
+            root.setPluginData(id, JSON.stringify(message.content))
+            setCard(JSON.parse(root.getPluginData(id)))
+            console.log(JSON.stringify(message)+" received")
+        }
+    })
+
+    const clickHandler = () => new Promise(
+        (resolve) => {
+            const cardMessage : Message = {
+                type: "card",
+                content: card,
+            }
+            figma.showUI(__html__, {width: 400, height: 560})
+            figma.ui.postMessage(cardMessage)
+    })
 
     return (
         <AutoLayout
         key={id}
         direction="vertical"
+        onClick={clickHandler}
         >
             <Text>{id}</Text>
             <Text>{card.name}</Text>
