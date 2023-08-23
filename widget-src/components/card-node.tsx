@@ -1,30 +1,36 @@
 const { widget } = figma
-const { useSyncedState, AutoLayout, Text, useEffect } = widget
+const { useSyncedState, useSyncedMap, AutoLayout, Text, useEffect } = widget
 import {Card, Message} from "../interfaces/index"
 
 const root = figma.root
 
-const baseCard : Card = {
-    name: "Name of the card",
-    description: "Description for the card, should be much bigger than the name",
-    nodeId: undefined,
-    date: "31-01-2021",
-    assignee: undefined
-}
+
 
 export function CardNode({id} : {id: string}) {
+
+    const baseCard : Card = {
+        id: id,
+        name: "Name of the card",
+        description: "Description for the card, should be much bigger than the name",
+        nodeId: undefined,
+        date: "2022-01-31",
+        assignee: undefined
+    }
 
     const filePluginDataKeys = root.getPluginDataKeys()
     if(!filePluginDataKeys.includes(id)) {
         root.setPluginData(id, JSON.stringify(baseCard))
     }
-    const [card, setCard] = useSyncedState<Card>(id, JSON.parse(root.getPluginData(id)))
+
+    const cardMap = useSyncedMap("cards")
+    const card = cardMap.get(id) as Card || JSON.parse(root.getPluginData(id)) as Card
 
     useEffect(() => {
         figma.ui.onmessage = (message) => {
-            root.setPluginData(id, JSON.stringify(message.content))
-            setCard(JSON.parse(root.getPluginData(id)))
-            console.log(JSON.stringify(message)+" received")
+            let newCard : Card = message.content
+            console.log(JSON.stringify(newCard)+" received to" + id + " from ui")
+            root.setPluginData(newCard.id, JSON.stringify(newCard))
+            cardMap.set(newCard.id, JSON.parse(root.getPluginData(newCard.id)))
         }
     })
 

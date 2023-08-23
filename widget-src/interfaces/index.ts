@@ -1,9 +1,10 @@
 export interface Card {
+    id: string,
     name: string,
-    description: string | undefined,
-    nodeId: string | undefined,
-    date: string | undefined,
-    assignee: BaseUser | undefined
+    description?: string,
+    nodeId?: string,
+    date?: string,
+    assignee?: BaseUser
   }
 
 export interface Message {
