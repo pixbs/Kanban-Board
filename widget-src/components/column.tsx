@@ -1,17 +1,25 @@
+const { widget } = figma
+const { AutoLayout, Text } = widget
 import Card, {CardProps} from './card'
-const { AutoLayout } = widget
 
-interface ColumnProps {
+export interface ColumnProps {
     name: string
     cards: CardProps[]
 }
 
-const Column = ({ column } : { column : ColumnProps }) => {
+const Column = (column: ColumnProps) => {
+
     return (
-        <AutoLayout>
+        <AutoLayout
+        direction='vertical'
+        spacing={2}
+        >
+            <Text fill="#FFF">{column.name}</Text>
             {column.cards.map((card) => (
-                <Card card={card} />
+                <Card {...card}/>
             ))}
         </AutoLayout>
     )
 }
+
+export default Column;
