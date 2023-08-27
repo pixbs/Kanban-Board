@@ -65,6 +65,7 @@ export function CardNode({id} : {id: string}) {
 
         // Variants
         onClick={clickHandler}
+        hoverStyle={{fill: theme.colors.secondary}}
         >
             <Text
                 name="name"

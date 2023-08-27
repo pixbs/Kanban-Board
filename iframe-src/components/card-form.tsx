@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { Card, Message } from '../../widget-src/interfaces/index'
+import { IconWrapper } from './icon-wrapper';
+import { DescriptionIcon } from './icons';
+import type CSS from 'node_modules/csstype/index.d.ts'
 
 export function CardForm(props) : JSX.Element {
 
@@ -28,21 +31,30 @@ export function CardForm(props) : JSX.Element {
         parent.postMessage({pluginMessage: message}, '*')
     }
 
-    return <>
-        <textarea 
-            value={name} 
-            id="name" 
-            onChange={event => setName(event.target.value)}
-            onKeyDown={handleKeyDown}
-            onBlur={handleBlur}
-        />
-        <textarea 
-            value={description} 
-            id="description" 
-            onChange={event => setDescription(event.target.value)}
-            onKeyDown={handleKeyDown}
-            onBlur={handleBlur}
-        />
+    return <div style={style}>
+        <IconWrapper icon={<DescriptionIcon color="#000000"/>}>
+            <textarea 
+                style={labelStyle}
+                value={name} 
+                id="name" 
+                onChange={event => setName(event.target.value)}
+                onKeyDown={handleKeyDown}
+                onBlur={handleBlur}
+            />
+        </IconWrapper>
+        <IconWrapper icon={<DescriptionIcon color="#000000"/>}>
+            <label htmlFor="description" style={labelStyle}>
+                Description
+            </label>
+            <textarea 
+                value={description} 
+                id="description" 
+                onChange={event => setDescription(event.target.value)}
+                onKeyDown={handleKeyDown}
+                onBlur={handleBlur}
+                style={textareaStyle}
+            /> 
+        </IconWrapper>
         <input 
             type="date" 
             value={date} 
@@ -51,5 +63,37 @@ export function CardForm(props) : JSX.Element {
             onKeyDown={handleKeyDown}
             onBlur={handleBlur}
         />
-    </>
+        <IconWrapper icon={<DescriptionIcon color="#000000"/>}>
+            <label htmlFor="link" style={labelStyle}>
+                Design link
+            </label>
+        </IconWrapper>
+    </div>
 }
+
+const style : CSS.Properties = {
+    display: "flex",
+    paddingTop: "3.5rem",
+    paddingRight: "6rem",
+    paddingBottom: "3rem",
+    paddingLeft: "2rem",
+    flexDirection: "column",
+    gap: "3rem",
+    alignSelf: "stretch",
+}
+
+const labelStyle : CSS.Properties = {
+    fontFamily: "Inter",
+    fontSize: "2rem",
+    fontWeight: "700",
+}
+
+const textareaStyle : CSS.Properties = {
+    fontFamily: "Inter",
+    width: "100%",
+    height: "auto",
+    fontSize: "2rem",
+    border: "none",
+    resize: "none",
+}
+
