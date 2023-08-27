@@ -1,6 +1,5 @@
 const { widget } = figma
 const { useEffect, useSyncedMap, useSyncedState, Text, AutoLayout, SVG } = widget
-import { Column } from "./components/index"
 
 const root = figma.root
 
