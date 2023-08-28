@@ -1,31 +1,40 @@
 const { widget } = figma
 const { AutoLayout, Text } = widget
-
-export interface CardProps {
-    name: string
-    onMove: (direction: 'left' | 'right') => void
-}
+import { CardProps } from "../interfaces/props"
 
 const Card = (card : CardProps) => {
     return (
         <AutoLayout
+        key={card.name}
         padding={8}
         fill="#FFF"
         cornerRadius={2}
         spacing={4}
         >
+            <Text>{card.id}</Text>
             <Text>{card.name}</Text>
             <Text
-                onClick={() => card.onMove('left')}
+                onClick={() => {
+                    if(!card.onChange) return
+                    card.onChange('left', card)
+                }}
             >
                 {"<-"}
             </Text>
             <Text
-                onClick={() => card.onMove('right')}
+                onClick={() => {
+                    if(!card.onChange) return
+                    card.onChange('right', card)
+                }}
             >
                 {"->"}
             </Text>
-            <Text>
+            <Text
+                onClick={() => {
+                    if(!card.onChange) return
+                    card.onChange('remove', card)
+                }}
+            >
                 {"X"}
             </Text>
             
