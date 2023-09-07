@@ -5,9 +5,10 @@ import { CardProps, ColumnProps } from "../interfaces/props"
 
 const Board = () => {
 
-    var [cardCount, setCardCount] = useSyncedState<number>('cardCount', 0)
+    const [cardCount, setCardCount] = useSyncedState<number>('cardCount', 0)
+    const [showEmptyCard, setShowEmptyCard] = useSyncedState<number | undefined>('showEmptyCard', undefined)
 
-    const handleChange = (action: 'left' | 'right' | 'remove', recieveCard : CardProps) => {
+    const handleChange = (action: 'left' | 'right' | 'remove' | 'complete', recieveCard : CardProps) => {
         if(!columns) return
         const newColumns = [...columns]
         for (let i = 0; i < newColumns.length; i++) {
@@ -25,6 +26,10 @@ const Board = () => {
                         newColumns[i].cards.splice(j, 1)
                         setColumns(newColumns)
                         return
+                    } else if (action === 'complete') {
+                        newColumns[newColumns.length - 1].cards.push(newColumns[i].cards[j])
+                        newColumns[i].cards.splice(j, 1)
+                        setColumns(newColumns)
                     } else if (action === 'remove') {
                         newColumns[i].cards.splice(j, 1)
                         setColumns(newColumns)
@@ -42,7 +47,7 @@ const Board = () => {
         const newColumns = [...columns]
         for (let i = 0; i < newColumns.length; i++) {
             if(newColumns[i].name === column.name) {
-                newColumns[i].cards.push(card)
+                newColumns[i].cards.unshift(card)
                 setColumns(newColumns)
                 return
             }
@@ -52,6 +57,7 @@ const Board = () => {
     const initialColumns: ColumnProps[] = [
         {name: 'To Do',cards: []},
         {name: 'In Progress',cards: []},
+        {name: 'Review',cards: []},
         {name: 'Done',cards: []}     
     ]
 
@@ -61,8 +67,8 @@ const Board = () => {
         <AutoLayout
         spacing={8}
         >
-            {columns.map((column) => (
-                <Column name={column.name} cards={column.cards} onChange={handleChange} onAdd={handleAdd}/>
+            {columns.map((column, index) => (
+                <Column index={index} name={column.name} cards={column.cards} onChange={handleChange} onAdd={handleAdd} showEmptyCard={showEmptyCard}/>
             ))}
         </AutoLayout>
     )
