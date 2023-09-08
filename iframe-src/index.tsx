@@ -1,27 +1,15 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { CardForm } from './components/card-form';
-import { IconWrapper } from './components/icon-wrapper';
-import { Card, Message } from '../widget-src/interfaces/index'
+import Card from './components/card';
+import { CardProps } from './interfaces/props';
 
 
 const root = createRoot(document.getElementById('root') as HTMLElement)
 
-var card : Card
-
-function IFrame() : JSX.Element {
-
-    return (
-        <CardForm card={card} />
-    )
-}
-
-onmessage = event => {
-    const message = event.data.pluginMessage as Message
+onmessage = (event) => {
+    const message = event.data.pluginMessage
     switch (message.type) {
-        case "card":
-            card = message.content as Card
-            root.render(<CardForm card={card} />)
-            break;
+        case 'card':
+            root.render(<Card {...message.content}/>)
     }
 }

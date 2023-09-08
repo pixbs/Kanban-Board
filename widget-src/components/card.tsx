@@ -1,8 +1,9 @@
 const { widget } = figma
-const { AutoLayout, Text, useSyncedState } = widget
+const { AutoLayout, Text } = widget
 import { CardProps } from "../interfaces/props"
 
 const Card = (card : CardProps) => {
+
     return (
         <AutoLayout
         key={card.name}
@@ -14,42 +15,17 @@ const Card = (card : CardProps) => {
         direction="vertical"
         >
             <Text>{card.id}</Text>
-            <Text>{card.name}</Text>
-            <AutoLayout
+            <Text
+                onClick={
+                    () => 
+                    new Promise((resolve) => {
+                        figma.showUI(__html__, {height: 500, width: 300});
+                        figma.ui.postMessage({type: 'card', content: {id: card.id, name: card.name, description: card.description, columnIndex: card.columnIndex}})
+                    })
+                }
             >
-                <Text
-                    onClick={() => {
-                        if(!card.onChange) return
-                        card.onChange('left', card)
-                    }}
-                >
-                    {"<-"}
-                </Text>
-                <Text
-                    onClick={() => {
-                        if(!card.onChange) return
-                        card.onChange('right', card)
-                    }}
-                >
-                    {"->"}
-                </Text>
-                <Text
-                    onClick={() => {
-                        if(!card.onChange) return
-                        card.onChange('complete', card)
-                    }}
-                >
-                    {"✔"}
-                </Text>
-                <Text
-                    onClick={() => {
-                        if(!card.onChange) return
-                        card.onChange('remove', card)
-                    }}
-                >
-                    {"X"}
-                </Text>
-            </AutoLayout>
+                {card.name}
+            </Text>
             
         </AutoLayout>
     )

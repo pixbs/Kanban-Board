@@ -1,0 +1,14 @@
+:root {
+    font-size: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    font-size: 4rem;
+    display: flex;
+    flex-direction: column;
+}
