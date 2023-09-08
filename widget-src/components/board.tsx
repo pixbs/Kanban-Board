@@ -5,39 +5,47 @@ import { CardProps, ColumnProps } from "../interfaces/props"
 
 const Board = () => {
 
+    useEffect(() => {
+        figma.ui.onmessage = (msg) => {
+            if(msg.type === 'move'){
+                moveCard(msg.content, msg.card)
+            }
+            if(msg.type === 'remove'){
+                removeCard(msg.card)
+                figma.closePlugin()
+            }
+        }
+    })
+
     const [cardCount, setCardCount] = useSyncedState<number>('cardCount', 0)
     const [showEmptyCard, setShowEmptyCard] = useSyncedState<number | undefined>('showEmptyCard', undefined)
-
-    const handleChange = (action: 'left' | 'right' | 'remove' | 'complete', recieveCard : CardProps) => {
+    
+    const findCard = (id : string) => {
         if(!columns) return
-        const newColumns = [...columns]
-        for (let i = 0; i < newColumns.length; i++) {
-            for (let j = 0 ; j < newColumns[i].cards.length; j++) {
-                if(newColumns[i].cards[j].id === recieveCard.id) {
-                    if(action === 'left') {
-                        if(i === 0) return
-                        newColumns[i-1].cards.push(newColumns[i].cards[j])
-                        newColumns[i].cards.splice(j, 1)
-                        setColumns(newColumns)
-                        return
-                    } else if (action === 'right') {
-                        if(i === newColumns.length - 1) return
-                        newColumns[i+1].cards.push(newColumns[i].cards[j])
-                        newColumns[i].cards.splice(j, 1)
-                        setColumns(newColumns)
-                        return
-                    } else if (action === 'complete') {
-                        newColumns[newColumns.length - 1].cards.push(newColumns[i].cards[j])
-                        newColumns[i].cards.splice(j, 1)
-                        setColumns(newColumns)
-                    } else if (action === 'remove') {
-                        newColumns[i].cards.splice(j, 1)
-                        setColumns(newColumns)
-                        return
-                    }
+        for (let i = 0; i < columns.length; i++) {
+            for (let j = 0 ; j < columns[i].cards.length; j++) {
+                if(columns[i].cards[j].id === id) {
+                    return {columns: i, cards: j}
                 }
             }
         }
+    }
+
+    const moveCard = (index : number, card : CardProps) => {
+        const cardLocation = findCard(card.id)
+        if(!cardLocation) return
+        const newColumns = [...columns]
+        newColumns[cardLocation.columns].cards.splice(cardLocation.cards, 1)
+        newColumns[index].cards.push(card)
+        setColumns(newColumns)
+    }
+
+    const removeCard = (card : CardProps) => {
+        const cardLocation = findCard(card.id)
+        if(!cardLocation) return
+        const newColumns = [...columns]
+        newColumns[cardLocation.columns].cards.splice(cardLocation.cards, 1)
+        setColumns(newColumns)
     }
 
     const handleAdd = (column : ColumnProps, card: CardProps) => {
@@ -68,7 +76,7 @@ const Board = () => {
         spacing={8}
         >
             {columns.map((column, index) => (
-                <Column index={index} name={column.name} cards={column.cards} onChange={handleChange} onAdd={handleAdd} showEmptyCard={showEmptyCard}/>
+                <Column index={index} name={column.name} cards={column.cards} onAdd={handleAdd} showEmptyCard={showEmptyCard}/>
             ))}
         </AutoLayout>
     )

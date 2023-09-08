@@ -1,7 +1,9 @@
 export interface CardProps {
     id: string
     name: string
-    onChange?: (action: 'left' | 'right' | 'remove' | 'complete', card: CardProps) => void
+    description?: string
+    asignee?: BaseUser
+    columnIndex?: number
 }
 
 export interface ColumnProps {
@@ -9,6 +11,5 @@ export interface ColumnProps {
     name: string
     cards: CardProps[]
     showEmptyCard?: number
-    onChange?: (action: 'left' | 'right' | 'remove' | 'complete', card: CardProps) => void
     onAdd?: (column : ColumnProps, card: CardProps) => void
 }

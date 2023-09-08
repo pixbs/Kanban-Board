@@ -31,7 +31,7 @@ const Column = (column: ColumnProps) => {
             </AutoLayout>
             <EmptyCard {...column}/>
             {column.cards.map((card) => (
-                <Card id={card.id} name={card.name} onChange={column.onChange}/>
+                <Card id={card.id} name={card.name} columnIndex={column.index}/>
             ))}
         </AutoLayout>
     )
