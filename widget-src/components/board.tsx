@@ -7,12 +7,16 @@ const Board = () => {
 
     useEffect(() => {
         figma.ui.onmessage = (msg) => {
-            if(msg.type === 'move'){
-                moveCard(msg.content, msg.card)
-            }
-            if(msg.type === 'remove'){
-                removeCard(msg.card)
-                figma.closePlugin()
+            switch (msg.type) {
+                case 'move':
+                    moveCard(msg.content, msg.card)
+                    break
+                case 'remove':
+                    removeCard(msg.card)
+                    figma.closePlugin()
+                    break
+                case 'update':
+                    updateCard(msg.card)
             }
         }
     })
@@ -32,6 +36,8 @@ const Board = () => {
     }
 
     const moveCard = (index : number, card : CardProps) => {
+        if(index === card.columnIndex) return
+        if(index > columns.length-1) return
         const cardLocation = findCard(card.id)
         if(!cardLocation) return
         const newColumns = [...columns]
@@ -45,6 +51,14 @@ const Board = () => {
         if(!cardLocation) return
         const newColumns = [...columns]
         newColumns[cardLocation.columns].cards.splice(cardLocation.cards, 1)
+        setColumns(newColumns)
+    }
+
+    const updateCard = (card : CardProps) => {
+        const cardLocation = findCard(card.id)
+        if(!cardLocation) return
+        const newColumns = [...columns]
+        newColumns[cardLocation.columns].cards[cardLocation.cards] = card
         setColumns(newColumns)
     }
 
@@ -65,7 +79,6 @@ const Board = () => {
     const initialColumns: ColumnProps[] = [
         {name: 'To Do',cards: []},
         {name: 'In Progress',cards: []},
-        {name: 'Review',cards: []},
         {name: 'Done',cards: []}     
     ]
 
@@ -76,7 +89,7 @@ const Board = () => {
         spacing={8}
         >
             {columns.map((column, index) => (
-                <Column index={index} name={column.name} cards={column.cards} onAdd={handleAdd} showEmptyCard={showEmptyCard}/>
+                <Column {...column} index={index} onAdd={handleAdd} showEmptyCard={showEmptyCard}/>
             ))}
         </AutoLayout>
     )
