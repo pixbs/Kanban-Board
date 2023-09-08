@@ -20,12 +20,13 @@ const Card = (card : CardProps) => {
                     () => 
                     new Promise((resolve) => {
                         figma.showUI(__html__, {height: 500, width: 300});
-                        figma.ui.postMessage({type: 'card', content: {id: card.id, name: card.name, description: card.description, columnIndex: card.columnIndex}})
+                        figma.ui.postMessage({type: 'card', content: card})
                     })
                 }
             >
                 {card.name}
             </Text>
+            <Text>{card.description}</Text>
             
         </AutoLayout>
     )
