@@ -1,7 +1,9 @@
 const { widget } = figma
-const { AutoLayout, useSyncedState, useEffect, waitForTask, useWidgetId } = widget
+const { AutoLayout, useSyncedState, useEffect, useWidgetNodeId } = widget
 import Column from './column'
 import { CardProps, ColumnProps } from "../interfaces/props"
+
+
 
 const Board = () => {
 
@@ -21,8 +23,8 @@ const Board = () => {
         }
     })
 
+    const widgetId = useWidgetNodeId()
     const [cardCount, setCardCount] = useSyncedState<number>('cardCount', 0)
-    const [showEmptyCard, setShowEmptyCard] = useSyncedState<number | undefined>('showEmptyCard', undefined)
     
     const findCard = (id : string) => {
         if(!columns) return
@@ -66,6 +68,12 @@ const Board = () => {
         if(!columns) return
         setCardCount(cardCount+1)
         card.id = `card-${cardCount}`
+        card.node = {
+            name: figma.currentPage.selection[0].name,
+            id: figma.currentPage.selection[0].id,
+            type: figma.currentPage.selection[0].type
+        }
+        console.log(card.node)
         const newColumns = [...columns]
         for (let i = 0; i < newColumns.length; i++) {
             if(newColumns[i].name === column.name) {
@@ -89,7 +97,7 @@ const Board = () => {
         spacing={8}
         >
             {columns.map((column, index) => (
-                <Column {...column} index={index} onAdd={handleAdd} showEmptyCard={showEmptyCard}/>
+                <Column {...column} index={index} onAdd={handleAdd}/>
             ))}
         </AutoLayout>
     )

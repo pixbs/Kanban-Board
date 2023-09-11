@@ -4,6 +4,7 @@ export interface CardProps {
     description?: string
     date?: string
     asignee?: BaseUser
+    node?: {name: string, id: string, type: string}
     columnIndex?: number
 }
 
@@ -11,6 +12,5 @@ export interface ColumnProps {
     index?: number
     name: string
     cards: CardProps[]
-    showEmptyCard?: number
     onAdd?: (column : ColumnProps, card: CardProps) => void
 }

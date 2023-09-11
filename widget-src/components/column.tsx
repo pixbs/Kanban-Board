@@ -3,10 +3,10 @@ const { AutoLayout, Text, useSyncedState } = widget
 import Card from './card'
 import EmptyCard from './empty-card'
 import { ColumnProps } from "../interfaces/props"
+import ColumnHeader from './column-header'
 
 const Column = (column: ColumnProps) => {
 
-    const [showEmptyCard, setShowEmptyCard] = useSyncedState<number | undefined>('showEmptyCard', column.showEmptyCard)
     const counter = column.cards?.length
 
     return (
@@ -16,19 +16,7 @@ const Column = (column: ColumnProps) => {
         spacing={2}
         width={300}
         >
-            <AutoLayout width='fill-parent'>
-                <Text fill="#FFF" width='fill-parent'>
-                    {`${column.name} (${column.cards?.length})`}
-                </Text>
-                <Text 
-                    fill='#FFF'
-                    onClick={() => {
-                        setShowEmptyCard(column.index)
-                    }}
-                >
-                    +
-                </Text>
-            </AutoLayout>
+            <ColumnHeader {...column}/>
             <EmptyCard {...column}/>
             {column.cards.map((card) => (
                 <Card {...card} columnIndex={column.index}/>
