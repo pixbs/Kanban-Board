@@ -39,3 +39,16 @@ export const TimeIcon = (props : Partial<SVGProps>) => {
         <SVGWrapper src={src} {...props}/>
     )
 }
+
+export const PlusIcon = (props : Partial<SVGProps>) => {
+    
+        const src = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path stroke="${props.fill}" stroke-linecap="round" stroke-linejoin="round" stroke-width="${props.strokeWidth}" d="M12 4v16m8-8H4"/>
+        </svg>
+        `
+    
+        return (
+            <SVGWrapper src={src} {...props}/>
+        )
+}
