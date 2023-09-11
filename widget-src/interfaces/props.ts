@@ -2,6 +2,7 @@ export interface CardProps {
     id: string
     name: string
     description?: string
+    date?: string
     asignee?: BaseUser
     columnIndex?: number
 }

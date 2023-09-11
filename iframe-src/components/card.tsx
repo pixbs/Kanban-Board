@@ -7,6 +7,8 @@ const Card = (card : CardProps) => {
     const [column, setColumn] = useState<number>(card.columnIndex? card.columnIndex : 0)
     const [name, setName] = useState<string>(card.name)
     const [description, setDescription] = useState<string>(card.description? card.description : '')
+    const [date, setDate] = useState<string>(card.date? card.date : '')
+    const columnNames = ['To Do', 'In Progress', 'Done']
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setColumn(parseInt(event.target.value))
@@ -17,7 +19,8 @@ const Card = (card : CardProps) => {
         card = {
             id: card.id,
             name: name,
-            description: description
+            description: description,
+            date: date,
         }
         parent.postMessage({pluginMessage: {type: 'update', card: card}}, '*')
     }
@@ -38,13 +41,13 @@ const Card = (card : CardProps) => {
                 onChange={handleChange} 
                 value={column}
             >
-                <option value={0}>To Do</option>
-                <option value={1}>In Progress</option>
-                <option value={2}>Done</option>
+                {columnNames.map((name, index) => 
+                    <option value={index} key={`${index}-${name}`}>{name}</option>
+                )}
             </select>
             <button
                 onClick={() => {
-                    if(column === 2) return
+                    if(column === columnNames.length -1) return
                     setColumn(column+1)
                     parent.postMessage({pluginMessage: {type: 'move',card: card, content: column+1}}, '*')
                 }}
@@ -57,10 +60,17 @@ const Card = (card : CardProps) => {
                 }}
             >Remove</button>
             <textarea
-            value={description}
-            onChange={(event) => {
-                setDescription(event.target.value)
-            }}
+                value={description}
+                onChange={(event) => {
+                    setDescription(event.target.value)
+                }}
+            />
+            <input
+                value={date}
+                type='date'
+                onChange={(event) => 
+                    setDate(event.target.value)
+                }
             />
         </div>
     )
