@@ -9,6 +9,7 @@ const SVGWrapper = (props : SVGProps) => {
             height={props.height}
             tooltip={props.tooltip}
             hoverStyle={props.hoverStyle}
+            onClick={props.onClick}
         />
     )
 }
@@ -22,7 +23,7 @@ export const DescriptionIcon = (props : Partial<SVGProps>) => {
     `
 
     return (
-        <SVGWrapper src={src} {...props}/>
+        <SVGWrapper {...props} src={src}/>
     )
 }
 
@@ -36,7 +37,7 @@ export const TimeIcon = (props : Partial<SVGProps>) => {
     `
 
     return (
-        <SVGWrapper src={src} {...props}/>
+        <SVGWrapper {...props} src={src}/>
     )
 }
 
@@ -49,6 +50,31 @@ export const PlusIcon = (props : Partial<SVGProps>) => {
         `
     
         return (
-            <SVGWrapper src={src} {...props}/>
+            <SVGWrapper {...props} src={src}/>
         )
+}
+
+export const LeftChevronIcon = (props : Partial<SVGProps>) => {
+    const src = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+    <path stroke="${props.fill}" stroke-linecap="round" stroke-linejoin="round" stroke-width="${props.strokeWidth}" d="m10 16 4-4-4-4"/>
+    </svg>
+    `
+
+    return (
+        <SVGWrapper {...props} src={src}/>
+    )
+}
+
+export const AddIcon = (props : Partial<SVGProps>) => {
+    const src = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+    <path stroke="${props.fill}" stroke-linecap="round" stroke-linejoin="round" stroke-width="${props.strokeWidth}" d="M12 8v8M16 12H8"/>
+    <path stroke="${props.fill}" stroke-linecap="round" stroke-linejoin="round" stroke-width="${props.strokeWidth}" d="M12 21v0a9 9 0 0 1-9-9v0a9 9 0 0 1 9-9v0a9 9 0 0 1 9 9v0a9 9 0 0 1-9 9Z" clip-rule="evenodd"/>
+    </svg>
+    `
+
+    return (
+        <SVGWrapper {...props} src={src}/>
+    )
 }

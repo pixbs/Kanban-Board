@@ -9,6 +9,7 @@ export interface CardProps {
     name: string
     description?: string
     date?: string
-    asignee?: BaseUser
+    assignee?: BaseUser
+    node?: {name: string, id: string, type: string}
     columnIndex?: number
 }

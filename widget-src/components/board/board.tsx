@@ -1,11 +1,13 @@
 const { widget } = figma
 const { AutoLayout, useSyncedState, useEffect, useWidgetNodeId } = widget
-import Column from './column'
-import { CardProps, ColumnProps } from "../interfaces/props"
+import Column from '../column/column'
+import { CardProps, ColumnProps } from "../../interfaces/props"
 
 
 
 const Board = () => {
+
+    const [unit] = useSyncedState<number>('unit', 0)
 
     useEffect(() => {
         figma.ui.onmessage = (msg) => {
@@ -65,14 +67,19 @@ const Board = () => {
     }
 
     const handleAdd = (column : ColumnProps, card: CardProps) => {
+        // get full copy of widget node
+        const widget = figma.getNodeById(widgetId) as InstanceNode
+        console.log(widget)
         if(!columns) return
         setCardCount(cardCount+1)
         card.id = `card-${cardCount}`
-        card.node = {
-            name: figma.currentPage.selection[0].name,
-            id: figma.currentPage.selection[0].id,
-            type: figma.currentPage.selection[0].type
+        card.node = {     
+            name: figma.getNodeById(widgetId)?.name || '',
+            id: figma.getNodeById(widgetId)?.id || '',
+            type: figma.getNodeById(widgetId)?.type || '',
         }
+        //const currentUser = figma.currentUser
+        //if (currentUser) card.assignee = currentUser
         console.log(card.node)
         const newColumns = [...columns]
         for (let i = 0; i < newColumns.length; i++) {
@@ -94,7 +101,7 @@ const Board = () => {
 
     return (
         <AutoLayout
-        spacing={8}
+        spacing={unit*2}
         >
             {columns.map((column, index) => (
                 <Column {...column} index={index} onAdd={handleAdd}/>

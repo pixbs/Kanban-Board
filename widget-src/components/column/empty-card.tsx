@@ -1,10 +1,10 @@
-import { ColumnProps } from "../interfaces/props"
+import { ColumnProps } from "../../interfaces/props"
 const { widget } = figma
 const { Input, AutoLayout, useSyncedState, Text } = widget
 
 const EmptyCard = (column : ColumnProps) => {
     const [cardName, setCardName] = useSyncedState<string>(`${column.name}-empty-card`, '')
-    const [showEmptyCard, setShowEmptyCard] = useSyncedState<number | undefined>('showEmptyCard', column.showEmptyCard)
+    const [showEmptyCard, setShowEmptyCard] = useSyncedState<number | undefined>('showEmptyCard', undefined)
     const show = showEmptyCard === column.index
     return (
         <AutoLayout

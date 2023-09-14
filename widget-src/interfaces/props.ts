@@ -3,7 +3,7 @@ export interface CardProps {
     name: string
     description?: string
     date?: string
-    asignee?: BaseUser
+    assignee?: BaseUser
     node?: {name: string, id: string, type: string}
     columnIndex?: number
 }
@@ -13,4 +13,8 @@ export interface ColumnProps {
     name: string
     cards: CardProps[]
     onAdd?: (column : ColumnProps, card: CardProps) => void
+}
+
+export interface typeIconProps extends Partial<SVGProps> {
+    type: string
 }

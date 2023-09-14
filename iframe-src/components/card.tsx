@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { CardProps } from '../interfaces/props';
-
+const test = () => {}
 const Card = (card : CardProps) => {
 
     const [column, setColumn] = useState<number>(card.columnIndex? card.columnIndex : 0)
@@ -17,10 +17,12 @@ const Card = (card : CardProps) => {
 
     const handleBlur = () => {
         card = {
+            ...card,
             id: card.id,
             name: name,
             description: description,
             date: date,
+            columnIndex: column,
         }
         parent.postMessage({pluginMessage: {type: 'update', card: card}}, '*')
     }
@@ -72,6 +74,9 @@ const Card = (card : CardProps) => {
                     setDate(event.target.value)
                 }
             />
+            <span>
+                {card.node?.name}
+            </span>
         </div>
     )
 
