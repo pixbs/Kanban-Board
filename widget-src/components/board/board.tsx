@@ -46,7 +46,7 @@ const Board = () => {
         if(!cardLocation) return
         const newColumns = [...columns]
         newColumns[cardLocation.columns].cards.splice(cardLocation.cards, 1)
-        newColumns[index].cards.push(card)
+        newColumns[index].cards.unshift(card)
         setColumns(newColumns)
     }
 

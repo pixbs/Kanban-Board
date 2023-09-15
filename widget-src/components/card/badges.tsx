@@ -9,6 +9,8 @@ import { blankTheme } from "../other/themes"
 
 const Badges = (card : CardProps) => {
 
+    if (!card.assignee && !card.description && !card.date && !card.node) return <></>
+
     const [theme] = useSyncedState<theme>('theme', blankTheme)
     const [unit] = useSyncedState<number>('unit', 0)
 

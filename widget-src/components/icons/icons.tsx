@@ -78,3 +78,15 @@ export const AddIcon = (props : Partial<SVGProps>) => {
         <SVGWrapper {...props} src={src}/>
     )
 }
+
+export const CancelIcon = (props : Partial<SVGProps>) => {
+    const src = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+    <path stroke="${props.fill}" stroke-linecap="round" stroke-linejoin="round" stroke-width="${props.strokeWidth}" d="m8 8 8 8M16 8l-8 8"/>
+    </svg>
+    `
+
+    return (
+        <SVGWrapper {...props} src={src}/>
+    )
+}
