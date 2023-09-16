@@ -25,6 +25,7 @@ const Card = (card : CardProps) => {
         //Style
         cornerRadius: unit*0.5,
         stroke: {type: "solid", color: theme.secondary},
+        strokeWidth: unit/8,
         fill: theme.background,
 
         //Events

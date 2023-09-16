@@ -37,7 +37,7 @@ const Badges = (card : CardProps) => {
 
     const iconStyle : Partial<SVGProps> = {
         fill: theme.primary,
-        strokeWidth: 1,
+        strokeWidth: unit/8,
         width: unit*2,
         height: unit*2,
     }

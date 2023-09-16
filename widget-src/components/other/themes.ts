@@ -25,3 +25,16 @@ export const darkTheme : theme = {
     colorBlue: "#3C4A53",
     colorPurple: "#464453"
 }
+
+export const lightTheme : theme = {
+    // Greyscale //
+    primary: "#333333",
+    secondary: "#E6E6E6",
+    background: "#FFFFFF",
+    // Colors //
+    colorRed: "#F9A491",
+    colorOrange: "#FCCC88",
+    colorGreen: "#8DE2BE",
+    colorBlue: "#8CD0FD",
+    colorPurple: "#BDB0FF"
+}

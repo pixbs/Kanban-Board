@@ -18,3 +18,9 @@ export interface ColumnProps {
 export interface typeIconProps extends Partial<SVGProps> {
     type: string
 }
+
+export interface propertyMenuDropdownProps {
+    name: string
+    options: string[]
+    selectedOption: string
+}

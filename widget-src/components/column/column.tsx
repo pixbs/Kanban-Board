@@ -1,7 +1,7 @@
 const { widget } = figma
 const { AutoLayout, useSyncedState } = widget
 import Card from '../card/card'
-import EmptyCard from './empty-card'
+import EmptyCard from '../card/empty-card'
 import { ColumnProps } from "../../interfaces/props"
 import ColumnHeader from './column-header'
 

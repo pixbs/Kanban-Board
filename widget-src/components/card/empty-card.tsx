@@ -21,13 +21,14 @@ const EmptyCard = (column : ColumnProps) => {
 
         // Layout
         wrap: true,
-        width: 'fill-parent',
+        width: unit*37.5,
         padding: unit*2,
         spacing: {vertical: unit, horizontal: unit*2},
 
         // Style
         cornerRadius: unit*0.5,
         stroke: {type: "solid", color: theme.secondary},
+        strokeWidth: unit/8,
         fill: theme.background,
     }
 
@@ -41,6 +42,7 @@ const EmptyCard = (column : ColumnProps) => {
         fill: theme.primary,
         fontSize: unit*2,
         fontWeight: 500,
+        width: unit*33.5,
 
         // Events
         onTextEditEnd: (e) => {
@@ -93,7 +95,7 @@ const EmptyCard = (column : ColumnProps) => {
 
         // Style
         fill: theme.primary,
-        strokeWidth: 1,
+        strokeWidth: unit/8,
 
         // Events
         onClick: () => {

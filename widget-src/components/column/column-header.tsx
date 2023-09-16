@@ -28,6 +28,7 @@ const ColumnHeader = (column: ColumnProps) => {
             // Style
             cornerRadius: unit*0.5,
             stroke: {type: "solid", color: theme.secondary},
+            strokeWidth: unit/8,
             fill: theme.background,
         }
 
@@ -51,7 +52,7 @@ const ColumnHeader = (column: ColumnProps) => {
             // Style
             cornerRadius: unit*0.5,
             stroke: {type: "solid", color: theme.secondary},
-            strokeWidth: 1.5,
+            strokeWidth: unit/5,
         }
 
         const counterStyle : TextProps = {
@@ -75,7 +76,7 @@ const ColumnHeader = (column: ColumnProps) => {
 
             // Style
             fill: theme.primary,
-            strokeWidth: 1,
+            strokeWidth: unit/8,
 
             // Events
             onClick: () => {
