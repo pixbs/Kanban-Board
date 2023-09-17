@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import Card from './components/card';
-import { CardProps } from './interfaces/props';
 
 
 const root = createRoot(document.getElementById('root') as HTMLElement)

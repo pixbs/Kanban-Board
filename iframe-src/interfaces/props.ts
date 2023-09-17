@@ -1,4 +1,4 @@
-interface BaseUser {
+export interface BaseUser {
     readonly id: string | null
     readonly name: string
     readonly photoUrl: string | null

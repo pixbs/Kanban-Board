@@ -1,13 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { CardProps } from '../interfaces/props';
-const test = () => {}
+import { BaseUser ,CardProps } from '../interfaces/props';
+
 const Card = (card : CardProps) => {
 
     const [column, setColumn] = useState<number>(card.columnIndex? card.columnIndex : 0)
     const [name, setName] = useState<string>(card.name)
     const [description, setDescription] = useState<string>(card.description? card.description : '')
     const [date, setDate] = useState<string>(card.date? card.date : '')
+    const [users, setUsers] = useState<BaseUser[]>([])
     const columnNames = ['To Do', 'In Progress', 'Done']
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -25,6 +26,15 @@ const Card = (card : CardProps) => {
             columnIndex: column,
         }
         parent.postMessage({pluginMessage: {type: 'update', card: card}}, '*')
+    }
+
+    onmessage = (event) => {
+        console.log(event.data)
+        const message = event.data.pluginMessage
+        if(message.type === 'users') {
+            console.log(message.content)
+            setUsers(message.content)
+        }
     }
 
     return (
@@ -74,9 +84,11 @@ const Card = (card : CardProps) => {
                     setDate(event.target.value)
                 }
             />
-            <span>
-                {card.node?.name}
-            </span>
+            {users.map((user, index) =>
+                <span key={`${index}-${user.name}`}>
+                    {user.name}
+                </span>
+            )}
         </div>
     )
 

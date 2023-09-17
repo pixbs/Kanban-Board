@@ -1,12 +1,11 @@
 import Board from './components/board/board'
 
 const { widget } = figma
-const { useSyncedState, usePropertyMenu } = widget
+const { useSyncedState, usePropertyMenu, useEffect } = widget
 
 import { theme } from './interfaces/types'
 import { blankTheme, darkTheme, lightTheme } from './components/other/themes'
 import { propertyMenuDropdown} from './components/other/propertyMenu'
-
 
 const root = figma.root
 
@@ -26,7 +25,7 @@ function Widget() {
 
     const [themeOption,setThemeOption] = useSyncedState<string>('theme-option', Object.keys(themes)[0])
     const [sizeOption,setSizeOption] = useSyncedState<string>('size-option', Object.keys(sizes)[0])
-
+    
     const [,setTheme] = useSyncedState<theme>('theme', themes['Light'])
     const [,setUnit] = useSyncedState<number>('unit', sizes['Small'])
 

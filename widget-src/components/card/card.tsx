@@ -4,11 +4,13 @@ import { CardProps } from "../../interfaces/props"
 import Badges from "./badges"
 import { theme } from "../../interfaces/types"
 import { blankTheme } from "../other/themes"
+import addUser from "../../utils/addUser"
 
 const Card = (card : CardProps) => {
 
     const [theme] = useSyncedState<theme>('theme', blankTheme)
     const [unit] = useSyncedState<number>('unit', 0)
+    const [users,setUsers] = useSyncedState<BaseUser[]>('users', [])
 
     const parentStyle : AutoLayoutProps = {
         //Properties
@@ -31,8 +33,12 @@ const Card = (card : CardProps) => {
         //Events
         hoverStyle: {fill: theme.secondary},
         onClick: () => new Promise((resolve) => {
+            setUsers(addUser(users, figma.currentUser))
+
             figma.showUI(__html__, {height: 540, width: 400});
             figma.ui.postMessage({type: 'card', content: card})
+            figma.ui.postMessage({type: 'users', content: users})
+            
         })
     }
 
