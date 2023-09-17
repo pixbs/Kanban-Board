@@ -18,3 +18,7 @@
     align-self: stretch;
     border-top: 8px solid var(--color-blue, #8CD0FD);
 }
+
+p {
+    font-size: 2rem;
+}

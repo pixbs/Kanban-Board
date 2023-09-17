@@ -98,6 +98,7 @@ const Board = () => {
     ]
 
     const [columns, setColumns] = useSyncedState<ColumnProps[]>('columns', initialColumns)
+    useSyncedState<string[]>('columnNames', columns.map((column) => column.name))
 
     return (
         <AutoLayout

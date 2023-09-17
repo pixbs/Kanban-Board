@@ -11,6 +11,7 @@ const Card = (card : CardProps) => {
     const [theme] = useSyncedState<theme>('theme', blankTheme)
     const [unit] = useSyncedState<number>('unit', 0)
     const [users,setUsers] = useSyncedState<BaseUser[]>('users', [])
+    const [columns] = useSyncedState<string[]>('columnNames', [])
 
     const parentStyle : AutoLayoutProps = {
         //Properties
@@ -38,6 +39,7 @@ const Card = (card : CardProps) => {
             figma.showUI(__html__, {height: 540, width: 400});
             figma.ui.postMessage({type: 'card', content: card})
             figma.ui.postMessage({type: 'users', content: users})
+            figma.ui.postMessage({type: 'columns', content: columns})
             
         })
     }
