@@ -3,28 +3,35 @@
   "version": "1.0.0",
   "description": "Your Figma widget",
   "scripts": {
-    "build": "npm run build-ui && npm run build-widget && node inline-script.js",
-    "build-ui": "esbuild iframe-src/index.tsx --bundle --outfile=dist/ui.js --target=es6",
-    "build-widget": "esbuild widget-src/index.tsx --bundle --outfile=dist/code.js --target=es6",
-    "watch-ui": "npm run build-ui -- --watch",
-    "watch-widget": "npm run build-widget -- --watch",
-    "watch-inline": "node inline-script.js --watch",
-    "tsc": "tsc --noEmit -p widget-src"
+    "test": "npm run tsc && npm run build",
+    "format": "prettier --write .",
+    "tsc": "npm run tsc:main && npm run tsc:ui",
+    "tsc:main": "tsc --noEmit -p widget-src",
+    "tsc:ui": "tsc --noEmit -p ui-src",
+    "tsc:watch": "concurrently -n widget,iframe \"npm run tsc:main -- --watch --preserveWatchOutput\" \"npm run tsc:ui -- --watch --preserveWatchOutput\"",
+    "build": "npm run build:ui && npm run build:main -- --minify",
+    "build:main": "esbuild widget-src/code.tsx --bundle --outfile=dist/code.js",
+    "build:ui": "npx vite build --minify esbuild --emptyOutDir=false",
+    "build:watch": "concurrently -n widget,iframe \"npm run build:main -- --watch\" \"npm run build:ui -- --watch\"",
+    "dev": "concurrently -n tsc,build,vite 'npm:tsc:watch' 'npm:build:watch' 'vite'"
   },
-  "author": "",
-  "license": "",
-  "devDependencies": {
-
-  },
+  "author": "Figma",
+  "license": "MIT License",
   "dependencies": {
-    "@figma/plugin-typings": "^1.74.0",
-    "@figma/widget-typings": "^1.8.0",
-    "esbuild": "^0.19.2",
-    "typescript": "*",
-    "@esbuild-plugins/node-resolve": "^0.2.2",
-    "@types/react-dom": "^18.2.7",
-    "csstype": "^3.1.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "*",
+    "@figma/widget-typings": "*",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@vitejs/plugin-react-refresh": "^1.3.1",
+    "concurrently": "^6.3.0",
+    "esbuild": "^0.13.5",
+    "prettier": "^2.3.2",
+    "typescript": "^4.4.2",
+    "vite": "^2.5.2",
+    "vite-plugin-singlefile": "^0.5.1"
   }
 }

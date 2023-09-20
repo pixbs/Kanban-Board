@@ -1,0 +1,77 @@
+.Actions {
+    display: flex;
+    padding-left: 2.5rem;
+    align-items: center;
+    align-content: center;
+    gap: 0.5rem;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.Actions .Wrapper {
+    /* Layout */
+    display: flex;
+    padding: 0.4375rem 0.75rem;
+    align-items: center;
+    gap: 0.25rem;
+
+    /* Style */
+    border-radius: 0.25rem;
+    border: 1.5px solid var(--secondary, #E6E6E6);
+}
+
+.Actions .Userpic {
+    /* Layout */
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.25rem;
+
+    /* Style */
+    border-radius: 1.25rem;
+}
+
+.columns {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+    overflow: hidden;
+
+    /* Style */
+    border-radius: 0.125rem;
+}
+
+.columns .dropdown {
+    /* Layout */
+    display: flex;
+    padding: 0.5rem 0.75rem;
+    align-items: center;
+    gap: 0.25rem;
+
+    /* Style */
+    background: var(--color-blue, #8CD0FD);
+}
+
+.columns .next {
+    /* Layout */
+    display: flex;
+    padding: 0.5rem;
+    align-items: center;
+    gap: 0.25rem;
+
+    /* Style */
+    background: #8CD0FD;
+}
+
+.Actions .remove_wrapper {
+    /* Layout */
+    display: flex;
+    padding: 0.4375rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+
+    /* Style */
+    border-radius: 0.125rem;
+    border: 1.5px solid var(--secondary, #E6E6E6);
+}
