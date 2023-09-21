@@ -39,16 +39,16 @@ export const LinkIcon = () => {
 
 export const CaretDownIcon = () => {
     return (
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 10L11 6L5 6L8 10Z" fill={color} fill-opacity="0.8"/>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 16 16">
+        <path stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5.333 6.667 8 9.334l2.667-2.667"/>
         </svg>
     )
 }
 
 export const NextIcon = () => {
     return (
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.9998 8L4.99982 4V12L10.9998 8Z" fill={color}/>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 16 16">
+        <path stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12.667 8H3.333M9.333 11.333 12.667 8M9.333 4.667 12.667 8"/>
         </svg>
     )
 }

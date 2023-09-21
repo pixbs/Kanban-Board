@@ -7,6 +7,12 @@ function Actions(actions: ActionsProps) {
     if (!actions.columns) return <></>
     if (!actions.assignee) actions.assignee = { id: '', name: '', photoUrl: '' }
 
+    const handleNext = () => {
+        const newIndex = actions.columnIndex ? actions.columnIndex + 1 : 1
+        if (newIndex > actions.columns.length - 1) return
+        actions.onMove(newIndex)
+    }
+
     return (
     <div className='actions'>
         <div className='columns'>
@@ -14,7 +20,7 @@ function Actions(actions: ActionsProps) {
                 <span>{actions.columns[actions.columnIndex ? actions.columnIndex : 0]}</span>
                 <CaretDownIcon />
             </div>
-            <div className='next'>
+            <div className='next' onClick={handleNext}>
                 <NextIcon />
             </div>
         </div>
@@ -27,7 +33,7 @@ function Actions(actions: ActionsProps) {
             <span>{actions.assignee ? actions.assignee.name : 'Unassigned'}</span>
             <CaretDownIcon />
         </div>
-        <div className='remove_wrapper'>
+        <div className='remove_wrapper' onClick={actions.onRemove}>
             <RemoveIcon />
         </div>
     </div>

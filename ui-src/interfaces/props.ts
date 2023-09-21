@@ -22,7 +22,10 @@ export interface CardProps {
 
 export interface ActionsProps {
   columnIndex?: number
-  columns?: string[]
+  columns: string[]
   date?: string
   assignee?: BaseUser
+  onMove: (index: number) => void
+  onUpdate: (card: CardProps) => void
+  onRemove: () => void
 }

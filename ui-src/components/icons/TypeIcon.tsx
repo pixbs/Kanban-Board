@@ -54,7 +54,7 @@ const WidgetIcon = () => {
 
 const TextIcon = () => {
     return (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <svg fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
         <path fillRule="evenodd" clipRule="evenodd" d="M3 3h10v3h-1V4H8.5v8H10v1H6v-1h1.5V4H4v2H3V3Z" fill={color}/>
         </svg>
     )

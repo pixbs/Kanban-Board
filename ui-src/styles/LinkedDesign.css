@@ -22,3 +22,11 @@
     border-radius: 0.25rem;
     border: 1.5px solid var(--figma-color-border);
 }
+
+.link_wrapper:hover {
+    background-color: var(--figma-color-bg-hover);
+}
+
+.link_wrapper:active {
+    background-color: var(--figma-color-border);
+}

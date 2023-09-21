@@ -77,3 +77,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ver_border {
+  align-self: stretch;
+
+  border-left: 1.5px solid var(--figma-color-border);
+}

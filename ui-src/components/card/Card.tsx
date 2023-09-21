@@ -7,10 +7,11 @@ function Card() {
     const [card, setCard] = useState<CardProps>({} as CardProps)
     const [users, setUsers] = useState<BaseUser[]>([])
     const [columns, setColumns] = useState<string[]>([])
-
+    
     const borderStyles = ['orange_border','blue_border','green_border']
-
+    
     const columnColors = ['FCCC88', '8CD0FD', '8DE2BE']
+
 
     onmessage = (event) => {
         const message = event.data.pluginMessage
@@ -27,10 +28,23 @@ function Card() {
         }
     }
 
+    const handleMove = (index : number) => {
+        setCard({...card, columnIndex: index})
+        parent.postMessage({ pluginMessage: { type: 'move', content: index, card: card } }, '*')
+    }
+
+    const handleRemove = () => {
+        parent.postMessage({ pluginMessage: { type: 'remove', card: card } }, '*')
+    }
+
+    const handleUpdate = () => {
+        parent.postMessage({ pluginMessage: { type: 'update', card: card } }, '*')
+    }
+
     return (
         <div className={`card ${borderStyles[card.columnIndex ? card.columnIndex : 0]}`}>
             <Title name={card.name}/>
-            <Actions columnIndex={card.columnIndex} columns={columns} date={card.date} assignee={card.assignee}/>
+            <Actions onMove={handleMove} onRemove={handleRemove} onUpdate={handleUpdate} columnIndex={card.columnIndex} columns={columns} date={card.date} assignee={card.assignee}/>
             <Description description={card.description}/>
             <LinkedDesign {...card.node}/>
         </div>
