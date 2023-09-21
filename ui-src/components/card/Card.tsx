@@ -37,13 +37,16 @@ function Card() {
         parent.postMessage({ pluginMessage: { type: 'remove', card: card } }, '*')
     }
 
-    const handleUpdate = () => {
-        parent.postMessage({ pluginMessage: { type: 'update', card: card } }, '*')
+    const handleUpdate = (cardProp : Partial<CardProps>) => {
+        const newCard = {...card, ...cardProp}
+        console.log(newCard)
+        setCard(newCard)
+        parent.postMessage({ pluginMessage: { type: 'update', card: newCard } }, '*')
     }
 
     return (
         <div className={`card ${borderStyles[card.columnIndex ? card.columnIndex : 0]}`}>
-            <Title name={card.name}/>
+            <Title onUpdate={handleUpdate} name={card.name}/>
             <Actions onMove={handleMove} onRemove={handleRemove} onUpdate={handleUpdate} columnIndex={card.columnIndex} columns={columns} date={card.date} assignee={card.assignee}/>
             <Description description={card.description}/>
             <LinkedDesign {...card.node}/>

@@ -23,6 +23,11 @@
   --color-purple: #BDB0FF;
 }
 
+*:focus-visible {
+  outline: 0 solid red;
+  color: var(--figma-color-text-onselected-secondary);
+}
+
 span, p {
   font-size: 0.75rem;
 }
