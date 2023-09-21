@@ -1,6 +1,6 @@
 import React from 'react';
-import { TitleIcon } from './Icons';
-import '../styles/Title.css';
+import { TitleIcon } from '../icons/Icons';
+import '../../styles/Title.css';
 
 function Title({name} : {name: string}) {
     return (

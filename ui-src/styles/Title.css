@@ -6,7 +6,7 @@
     align-self: stretch;
 
     /* Typography */
-    color: var(--primary, #333);
+    color: var(--figma-color-text);
     font-size: 1.125rem;
     font-weight: 600;
 }

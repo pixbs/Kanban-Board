@@ -6,3 +6,16 @@
     gap: 1.5rem;
     border-top: 8px solid #8CD0FD;
 }
+
+.orange_border {
+    border-top: 8px solid var(--color-orange);
+}
+
+.blue_border {
+    border-top: 8px solid var(--color-blue);
+}
+
+.green_border {
+    border-top: 8px solid var(--color-green);
+}
+

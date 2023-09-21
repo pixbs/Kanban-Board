@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/Description.css'
-import { DescriptionIcon } from './Icons';
+import '../../styles/Description.css'
+import { DescriptionIcon } from '../icons/Icons';
 
 function Description({ description }: { description?: string }) {
     return (

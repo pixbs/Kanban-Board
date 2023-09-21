@@ -36,7 +36,7 @@ const Card = (card : CardProps) => {
         onClick: () => new Promise((resolve) => {
             setUsers(addUser(users, figma.currentUser))
 
-            figma.showUI(__html__, {height: 540, width: 400});
+            figma.showUI(__html__, {themeColors: true, height: 540, width: 400});
             figma.ui.postMessage({type: 'card', content: card})
             figma.ui.postMessage({type: 'users', content: users})
             figma.ui.postMessage({type: 'columns', content: columns})

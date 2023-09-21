@@ -1,12 +1,14 @@
 import React, { useState } from "react"
-import { BaseUser, CardProps } from '../interfaces/props'
+import { BaseUser, CardProps } from '../../interfaces/props'
 import { Title, Actions, Description, LinkedDesign } from "./index"
-import "../styles/Card.css"
+import "../../styles/Card.css"
 function Card() {
     
     const [card, setCard] = useState<CardProps>({} as CardProps)
     const [users, setUsers] = useState<BaseUser[]>([])
     const [columns, setColumns] = useState<string[]>([])
+
+    const borderStyles = ['orange_border','blue_border','green_border']
 
     const columnColors = ['FCCC88', '8CD0FD', '8DE2BE']
 
@@ -26,7 +28,7 @@ function Card() {
     }
 
     return (
-        <div className="card">
+        <div className={`card ${borderStyles[card.columnIndex ? card.columnIndex : 0]}`}>
             <Title name={card.name}/>
             <Actions columnIndex={card.columnIndex} columns={columns} date={card.date} assignee={card.assignee}/>
             <Description description={card.description}/>

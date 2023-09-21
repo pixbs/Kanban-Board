@@ -1,7 +1,7 @@
 import React from 'react';
-import '../styles/Actions.css'
-import { ActionsProps } from '../interfaces/props';
-import { CaretDownIcon, NextIcon, RemoveIcon, TimeIcon } from './Icons';
+import '../../styles/Actions.css'
+import { ActionsProps } from '../../interfaces/props';
+import { CaretDownIcon, NextIcon, RemoveIcon, TimeIcon } from '../icons/Icons';
 
 function Actions(actions: ActionsProps) {
     if (!actions.columns) return <></>

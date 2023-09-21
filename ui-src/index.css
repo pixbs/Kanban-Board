@@ -1,7 +1,26 @@
 * {
   margin: 0;
-  color: var(--primary, #333);
+  color: var(--figma-color-text);
   font-weight: 700;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.figma-dark body {
+  --color-red: #52413D;
+  --color-orange: #53493C;
+  --color-green: #3D4E46;
+  --color-blue: #3C4A53;
+  --color-purple: #464453;
+}
+
+.figma-light body {
+  --color-red: #F9A491;
+  --color-orange: #FCCC88;
+  --color-green: #8DE2BE;
+  --color-blue: #8CD0FD;
+  --color-purple: #BDB0FF;
 }
 
 span, p {
@@ -15,6 +34,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 h3 {
@@ -22,7 +42,7 @@ h3 {
   align-self: stretch;
 
   /* Typography */
-  color: var(--primary, #333);
+  color: var(--figma-color-text);
   font-size: 1rem;
   font-weight: 700;
 
@@ -33,7 +53,7 @@ h4 {
     align-self: stretch;
 
     /* Typography */
-    color: var(--primary, #333);
+    color: var(--figma-color-text);
     font-size: 1rem;
     font-weight: 400;
 }

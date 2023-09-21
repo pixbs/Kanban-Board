@@ -20,5 +20,5 @@
 
     /* Style */
     border-radius: 0.25rem;
-    border: 1.5px solid var(--secondary, #E6E6E6);
+    border: 1.5px solid var(--figma-color-border);
 }
