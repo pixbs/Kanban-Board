@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { TimeIcon } from "../icons/Icons";
 import { CardContext } from "../card/Card";
+import keyPressHandler from "../../utils/KeyPressHandler";
 
 function DueDate() {
 
@@ -31,6 +32,7 @@ function DueDate() {
                 placeholder="Due date"
                 contentEditable={true}
                 onBlur={handleTextBlur}
+                onKeyDown={keyPressHandler}
                 ref={ref}
             >
                 {card.date}

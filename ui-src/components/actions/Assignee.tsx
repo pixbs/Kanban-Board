@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { CaretDownIcon, UserIcon } from "../icons/Icons";
 import { CardContext } from "../card/Card";
 import "../../styles/actions/Assignee.css"
+import keyPressHandler from "../../utils/KeyPressHandler";
 
 function Assignee() {
 
@@ -21,6 +22,7 @@ function Assignee() {
             tabIndex={0}
             onFocus={() => setDisplay(true)}
             onBlur={() => setDisplay(false)}
+            onKeyDown={keyPressHandler}
         >
             {image}
             <span placeholder="Add assignee">

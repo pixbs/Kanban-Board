@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/Description.css'
 import { DescriptionIcon } from '../icons/Icons';
 import { CardProps } from '../../interfaces/props';
+import keyPressHandler from '../../utils/KeyPressHandler';
 
 function Description({ description, onUpdate }: { description?: string, onUpdate: (card: Partial<CardProps>) => void }) {
     const handleTextBlur = (e: React.FormEvent<HTMLSpanElement>) => {

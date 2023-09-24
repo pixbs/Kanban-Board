@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TitleIcon } from '../icons/Icons';
 import '../../styles/Title.css';
 import { CardProps } from '../../interfaces/props';
+import keyPressHandler from '../../utils/KeyPressHandler';
 
 function Title({name, onUpdate} : {name: string, onUpdate: (card: Partial<CardProps>) => void}) {
 
@@ -18,6 +19,7 @@ function Title({name, onUpdate} : {name: string, onUpdate: (card: Partial<CardPr
                 contentEditable={true}
                 onBlur={handleTextBlur}
                 placeholder="Card name can't be empty."
+                onKeyDown={keyPressHandler}
             >
                 {name}
             </span>

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { CaretDownIcon, NextIcon } from "../icons/Icons";
 import { CardContext } from "../card/Card";
+import keyPressHandler from "../../utils/KeyPressHandler";
 
 function SelectColumn() {
 
@@ -22,6 +23,7 @@ function SelectColumn() {
                 tabIndex={0}
                 onFocus={() => setDisplay(true)}
                 onBlur={() => setDisplay(false)}
+                onKeyDown={keyPressHandler}
             >
                 <span>{currentColumn}</span>
                 <CaretDownIcon />
