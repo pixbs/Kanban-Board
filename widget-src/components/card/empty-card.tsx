@@ -65,7 +65,7 @@ const EmptyCard = (column : ColumnProps) => {
         onClick: () => {
             if(!column.onAdd) return
             if(!cardName) {
-                figma.notify('Please enter a card name', {error: true})
+                figma.notify('Please enter a card name')
                 return
             }
             column.onAdd({name: column.name, cards: []}, {id: '',name: cardName})

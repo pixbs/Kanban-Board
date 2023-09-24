@@ -14,13 +14,12 @@ function Widget() {
     const themes = {
         'Light': lightTheme,
         'Dark': darkTheme,
-        'Blank Theme': blankTheme
     }
 
     const sizes = {
         'Small': 8,
         'Medium': 16,
-        'Large': 24
+        'Large': 24,
     }
 
     const [themeOption,setThemeOption] = useSyncedState<string>('theme-option', Object.keys(themes)[0])

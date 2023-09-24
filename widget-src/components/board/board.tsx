@@ -1,14 +1,15 @@
 const { widget } = figma
 const { AutoLayout, useSyncedState, useEffect, useWidgetNodeId } = widget
 import Column from '../column/column'
-import { CardProps, ColumnProps } from "../../interfaces/props"
+import { CardProps, ColumnProps, NodeProps } from "../../interfaces/props"
+import ShowNode from '../../utils/showNode'
+import firstCard from '../other/firstCard'
 
 
 
 const Board = () => {
 
     const [unit] = useSyncedState<number>('unit', 0)
-
     useEffect(() => {
         figma.ui.onmessage = (msg) => {
             switch (msg.type) {
@@ -21,11 +22,16 @@ const Board = () => {
                     break
                 case 'update':
                     updateCard(msg.card)
+                    break
+                case 'link':
+                    updateLink(msg.card)
+                    break
+                case 'open':
+                    ShowNode(msg.card.node)
             }
         }
     })
-
-    const widgetId = useWidgetNodeId()
+    
     const [cardCount, setCardCount] = useSyncedState<number>('cardCount', 0)
     
     const findCard = (id : string) => {
@@ -64,11 +70,25 @@ const Board = () => {
         const newColumns = [...columns]
         newColumns[cardLocation.columns].cards[cardLocation.cards] = card
         setColumns(newColumns)
+        figma.ui.postMessage({type: 'card', content: card})
+    }
+
+    const updateLink = (card : CardProps) => {
+        if (figma.currentPage.selection.length !== 1) {
+            console.log('Please select one object')
+            return
+        }
+        const node : NodeProps = {
+            name: figma.currentPage.selection[0].name,
+            id: figma.currentPage.selection[0].id,
+            type: figma.currentPage.selection[0].type,
+            pageId: figma.currentPage.id
+        }
+
+        updateCard({...card, node: node})
     }
 
     const handleAdd = (column : ColumnProps, card: CardProps) => {
-        // get full copy of widget node
-        const widget = figma.getNodeById(widgetId) as InstanceNode
         if(!columns) return
         setCardCount(cardCount+1)
         card.id = `card-${cardCount}`
@@ -88,7 +108,7 @@ const Board = () => {
     }
 
     const initialColumns: ColumnProps[] = [
-        {name: 'To Do',cards: []},
+        {name: 'To Do',cards: [firstCard]},
         {name: 'In Progress',cards: []},
         {name: 'Done',cards: []}     
     ]

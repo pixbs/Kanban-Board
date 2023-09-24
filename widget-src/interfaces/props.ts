@@ -1,10 +1,17 @@
+export interface NodeProps {
+    name: string
+    id: string
+    type: string
+    pageId: string
+  }
+
 export interface CardProps {
     id: string
     name: string
     description?: string
     date?: string
     assignee?: BaseUser
-    node?: {name: string, id: string, type: string}
+    node?: NodeProps
     columnIndex?: number
 }
 

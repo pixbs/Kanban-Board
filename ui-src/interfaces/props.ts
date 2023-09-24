@@ -5,9 +5,10 @@ export interface BaseUser {
   }
 
 export interface NodeProps {
-  name: string
-  id: string
-  type: string
+  name: string,
+  id: string,
+  type: string,
+  pageId: string,
 }
 
 export interface CardProps {
