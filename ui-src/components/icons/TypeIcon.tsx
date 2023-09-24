@@ -16,8 +16,6 @@ const TypeIcon = ({ type }: { type?: string }) => {
             return <ConnectorIcon />
         case 'ELLIPSE':
             return <EllipseIcon />
-        case 'FRAME':
-            return <FrameIcon />
         case 'GROUP':
             return <GroupIcon />
         case 'INSTANCE':
@@ -40,8 +38,10 @@ const TypeIcon = ({ type }: { type?: string }) => {
             return <TextIcon />
         case 'TABLE':
             return <TableIcon />
+        case 'FRAME':
+        default:
+                return <FrameIcon />
     }
-    return <></>
 }
 
 const WidgetIcon = () => {

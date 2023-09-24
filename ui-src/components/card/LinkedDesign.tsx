@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { LinkIcon, NextIcon } from '../icons/Icons';
-import { NodeProps } from '../../interfaces/props';
 import '../../styles/LinkedDesign.css'
 import TypeIcon from '../icons/TypeIcon';
+import { CardContext } from './Card';
 
-function LinkedDesign(node : Partial<NodeProps>) {
+function LinkedDesign() {
+    const {card, columns, move} = useContext(CardContext)
+
+    const node = card.node
+
     return (
         <div className='icon_wrapper'>
             <LinkIcon />
@@ -12,8 +16,13 @@ function LinkedDesign(node : Partial<NodeProps>) {
                 <h3>Design</h3>
                 <div className='link_group fill'>
                     <div className='link_wrapper fill'>
-                        <TypeIcon type={node.type} />
-                        <span className='text-overflow fill'>{node.name}</span>
+                        <TypeIcon type={node?.type} />
+                        <span 
+                            className='text-overflow fill'
+                            placeholder='Click here to link selected object'
+                        >
+                            {node?.name}
+                        </span>
                     </div>
                     <div className='link_wrapper'>
                         <NextIcon />
