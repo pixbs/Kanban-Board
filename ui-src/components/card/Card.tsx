@@ -74,7 +74,7 @@ function Card() {
                 <Title onUpdate={handleUpdate} name={card.name}/>
                 <Actions />
                 <Description onUpdate={handleUpdate} description={card.description}/>
-                <LinkedDesign {...card.node}/>
+                <LinkedDesign />
             </div>
         </CardContext.Provider>
     )

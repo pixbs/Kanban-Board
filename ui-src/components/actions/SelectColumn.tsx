@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CaretDownIcon, NextIcon } from "../icons/Icons";
 import { CardContext } from "../card/Card";
 
 function SelectColumn() {
 
     const {card, columns, move} = useContext(CardContext)
-    const [display, setDisplay] = React.useState(false)
+    const [display, setDisplay] = useState(false)
 
     const handleNext = () => {
         const newIndex = card.columnIndex ? card.columnIndex + 1 : 1
@@ -20,12 +20,13 @@ function SelectColumn() {
             <div 
                 className='dropdown' 
                 tabIndex={0}
-                onClick={() => setDisplay(!display)}
+                onFocus={() => setDisplay(true)}
+                onBlur={() => setDisplay(false)}
             >
                 <span>{currentColumn}</span>
                 <CaretDownIcon />
+                <Dropdown display={display}/>
             </div>
-            <Dropdown display={display}/>
             <div className='next' onClick={handleNext}>
                 <NextIcon />
             </div>
@@ -43,7 +44,6 @@ function Dropdown({display} : {display: boolean}) {
                 key={index}
                 onClick={() => {
                     move(index)
-                    display = !display
                 }}
             >
                 {column}

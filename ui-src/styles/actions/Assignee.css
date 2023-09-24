@@ -1,0 +1,14 @@
+.Assignee {
+    position: relative;
+}
+
+
+.Userpic {
+    /* Layout */
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.25rem;
+
+    /* Style */
+    border-radius: 1.25rem;
+}

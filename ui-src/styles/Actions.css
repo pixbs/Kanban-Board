@@ -35,16 +35,6 @@
     background-color: var(--figma-color-border);
 }
 
-.Actions .Userpic {
-    /* Layout */
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-right: 0.25rem;
-
-    /* Style */
-    border-radius: 1.25rem;
-}
-
 .columns {
     /* Layout */
     position: relative;
@@ -123,6 +113,7 @@
 
 .dropdown-list {
     position: absolute;
+    z-index: 99;
     top: 2rem;
     left:-1.5px;
     width: 8.5rem;
@@ -141,6 +132,8 @@
 
 .dropdown-list span {
     display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
     padding: 0.5rem 1.5rem 0.5rem 0.75rem;
     align-items: center;
     align-self: stretch;
@@ -152,6 +145,18 @@
 
 .dropdown-list span:active {
     background-color: var(--figma-color-border);
+}
+
+.dropdown-list .selected {
+    background-color: var(--figma-color-bg-onselected);
+}
+
+.dropdown-list .selected:hover {
+    background-color: var(--figma-color-bg-onselected-hover);
+}
+
+.dropdown-list .selected:active {
+    background-color: var(--figma-color-bg-onselected-pressed);
 }
 
 .date {
