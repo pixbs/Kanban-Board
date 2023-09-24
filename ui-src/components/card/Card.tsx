@@ -7,11 +7,17 @@ export const CardContext = createContext<{
     card: CardProps, 
     users: BaseUser[], 
     columns: string[]
+    move: (index: number) => void
+    remove: () => void
+    update: (card: Partial<CardProps>) => void
 }>
     ({
         card: {} as CardProps, 
         users: [], 
-        columns: []
+        columns: [],
+        move: (index: number) => {throw new Error('Move function was not assigned')},
+        remove: () => {throw new Error('Remove function was not assigned')},
+        update: (card: Partial<CardProps>) => {throw new Error('Update function was not assigned')}
     })
 
 function Card() {
@@ -58,12 +64,15 @@ function Card() {
             {
                 card: card,
                 users: users,
-                columns: columns
+                columns: columns,
+                move: handleMove,
+                remove: handleRemove,
+                update: handleUpdate
             }
         }>
             <div className={`card ${borderStyles[card.columnIndex ? card.columnIndex : 0]}`}>
                 <Title onUpdate={handleUpdate} name={card.name}/>
-                <Actions onMove={handleMove} onRemove={handleRemove} onUpdate={handleUpdate} columnIndex={card.columnIndex} columns={columns} date={card.date} assignee={card.assignee}/>
+                <Actions />
                 <Description onUpdate={handleUpdate} description={card.description}/>
                 <LinkedDesign {...card.node}/>
             </div>

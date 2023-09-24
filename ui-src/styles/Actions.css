@@ -47,6 +47,7 @@
 
 .columns {
     /* Layout */
+    position: relative;
     display: flex;
     height: 2rem;
     align-items: center;
@@ -68,11 +69,19 @@
     background-color: var(--figma-color-bg);
 }
 
-.columns div:hover {
+.columns .next:hover {
     background-color: var(--figma-color-bg-hover);
 }
 
-.columns div:active {
+.columns .dropdown:hover {
+    background-color: var(--figma-color-bg-hover);
+}
+
+.columns .next:active {
+    background-color: var(--figma-color-border);
+}
+
+.columns .dropdown:active {
     background-color: var(--figma-color-border);
 }
 
@@ -110,4 +119,41 @@
 
 .Actions .remove_wrapper:active {
     background-color: var(--figma-color-border);
+}
+
+.dropdown-list {
+    position: absolute;
+    top: 2rem;
+    left:-1.5px;
+    width: 8.5rem;
+
+    /* Layout */
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    /* Style */
+    border-radius: 0.125rem;
+    border: 1.5px solid var(--figma-color-border);
+    background: var(--figma-color-bg);
+}
+
+.dropdown-list span {
+    display: flex;
+    padding: 0.5rem 1.5rem 0.5rem 0.75rem;
+    align-items: center;
+    align-self: stretch;
+}
+
+.dropdown-list span:hover {
+    background-color: var(--figma-color-bg-hover);
+}
+
+.dropdown-list span:active {
+    background-color: var(--figma-color-border);
+}
+
+.date {
+    min-width: 6rem;
 }

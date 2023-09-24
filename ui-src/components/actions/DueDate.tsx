@@ -4,12 +4,35 @@ import { CardContext } from "../card/Card";
 
 function DueDate() {
 
-    const {card} = useContext(CardContext)
+    const ref = React.createRef<HTMLSpanElement>()
+
+    const {card, update} = useContext(CardContext)
+
+    const handleTextBlur = (e: React.FormEvent<HTMLSpanElement>) => {
+        const content = e.currentTarget.textContent
+        if (!content) {
+            update({date: undefined})
+            return
+        }
+        const dueDate = new Date(content)
+        if (dueDate.getTime() !== dueDate.getTime()) {
+            e.currentTarget.innerText = card.date || ''
+            return
+        }
+        update({date: dueDate.toLocaleDateString("en-US", {month: 'short', day: '2-digit'})})
+    }
 
     return (
-        <div className='wrapper date'>
+        <div className='wrapper date'
+        onClick={() => ref.current?.focus()}
+        >
             <TimeIcon />
-            <span placeholder="Add due date">
+            <span 
+                placeholder="Due date"
+                contentEditable={true}
+                onBlur={handleTextBlur}
+                ref={ref}
+            >
                 {card.date}
             </span>
         </div>

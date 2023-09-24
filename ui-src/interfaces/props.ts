@@ -19,13 +19,3 @@ export interface CardProps {
   node?: NodeProps
   columnIndex?: number
 }
-
-export interface ActionsProps {
-  columnIndex?: number
-  columns: string[]
-  date?: string
-  assignee?: BaseUser
-  onMove: (index: number) => void
-  onUpdate: (card: CardProps) => void
-  onRemove: () => void
-}

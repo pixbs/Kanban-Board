@@ -69,18 +69,14 @@ const Board = () => {
     const handleAdd = (column : ColumnProps, card: CardProps) => {
         // get full copy of widget node
         const widget = figma.getNodeById(widgetId) as InstanceNode
-        console.log(widget)
         if(!columns) return
         setCardCount(cardCount+1)
         card.id = `card-${cardCount}`
-        card.node = {     
-            name: figma.getNodeById(widgetId)?.name || '',
-            id: figma.getNodeById(widgetId)?.id || '',
-            type: figma.getNodeById(widgetId)?.type || '',
-        }
-        //const currentUser = figma.currentUser
-        //if (currentUser) card.assignee = currentUser
-        console.log(card.node)
+        // card.node = {     
+        //     name: figma.getNodeById(widgetId)?.name || '',
+        //     id: figma.getNodeById(widgetId)?.id || '',
+        //     type: figma.getNodeById(widgetId)?.type || '',
+        // }
         const newColumns = [...columns]
         for (let i = 0; i < newColumns.length; i++) {
             if(newColumns[i].name === column.name) {
