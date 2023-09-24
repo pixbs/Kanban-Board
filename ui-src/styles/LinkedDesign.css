@@ -10,6 +10,10 @@
     flex: 1 0 0;
 }
 
+.link_group span {
+    user-select: none;
+}
+
 .link_wrapper {
     /* Layout */
     display: flex;
@@ -21,6 +25,7 @@
     /* Style */
     border-radius: 0.25rem;
     border: 1.5px solid var(--figma-color-border);
+    cursor: pointer;
 }
 
 .link_wrapper:hover {

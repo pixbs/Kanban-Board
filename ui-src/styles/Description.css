@@ -1,0 +1,18 @@
+.description {
+    white-space: pre-wrap;
+}
+
+.description div {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    color: var(--figma-color-text);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.description:empty::before {
+  color: var(--figma-color-text-tertiary);
+  cursor: text;
+}

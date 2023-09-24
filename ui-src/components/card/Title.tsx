@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { TitleIcon } from '../icons/Icons';
 import '../../styles/Title.css';
-import EditableSpan from '../misc/EditableSpan';
 import { CardProps } from '../../interfaces/props';
 
 function Title({name, onUpdate} : {name: string, onUpdate: (card: Partial<CardProps>) => void}) {
 
-    const handleTextEdit = (e: React.FormEvent<HTMLSpanElement>) => {
-        onUpdate({name: e.currentTarget.textContent || ''});
+    const handleTextBlur = (e: React.FormEvent<HTMLSpanElement>) => {
+        if (!e.currentTarget.textContent) return;
+        onUpdate({name: e.currentTarget.textContent});
     }
 
     return (
@@ -16,11 +16,11 @@ function Title({name, onUpdate} : {name: string, onUpdate: (card: Partial<CardPr
             <span 
                 className='Name' 
                 contentEditable={true}
-                onBlur={handleTextEdit}
+                onBlur={handleTextBlur}
+                placeholder="Card name can't be empty."
             >
                 {name}
             </span>
-            {/* <EditableSpan text={name} onEdit={onUpdate}/> */}
         </div>
     )
 }

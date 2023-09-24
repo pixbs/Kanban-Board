@@ -55,21 +55,27 @@ export const NextIcon = () => {
 
 export const TimeIcon = () => {
     return (
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6.4178 2.76501C9.86105 1.33851 13.8083 2.97426 15.2348 6.41751C16.6613 9.86076 15.0256 13.808 11.5823 15.2345C8.13905 16.661 4.1918 15.0253 2.7653 11.582C1.33955 8.13876 2.97455 4.19151 6.4178 2.76501" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8.78857 5.98828V9.47653L11.5306 11.1483" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.205 2.458a5.998 5.998 0 1 1 4.59 11.084 5.998 5.998 0 0 1-4.59-11.084" stroke={color} strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M8.312 5.324v3.1l2.437 1.486" stroke={color} strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
     )
 }
 
 export const RemoveIcon = () => {
     return (
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.75 5.25H14.25" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M13.5 5.25V13.5C13.5 14.3288 12.8288 15 12 15H6C5.17125 15 4.5 14.3288 4.5 13.5V5.25" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M11.25 2.8125H6.75" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M7.5 8.25V12" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M10.5 8.25V12" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.333 4.667v8c0 .736-.597 1.333-1.333 1.333H5a1.333 1.333 0 0 1-1.333-1.334v-8M13.333 4.667H2.667" stroke={color} strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M5.667 4.667v-.334A2.333 2.333 0 0 1 8 2v0a2.333 2.333 0 0 1 2.333 2.333v.334M6.667 10.667V8M9.333 10.667V8" stroke={color} strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+    )
+}
+
+export const UserIcon = () => {
+    return (
+        <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.333 13.333v-.5A2.833 2.833 0 0 0 10.5 10h-5a2.833 2.833 0 0 0-2.833 2.833v.5" stroke={color} strokeLinecap="round" strokeLinejoin="round"/>
+            <circle cx="8" cy="4.667" r="2.667" stroke={color} strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
     )
 }

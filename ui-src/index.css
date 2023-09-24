@@ -5,6 +5,24 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  word-break: break-word;
+}
+
+*:focus-visible {
+  outline: 0 solid red;
+  color: var(--figma-color-text-onselected) !important;
+  background-color: var(--figma-color-bg-selected-tertiary) !important;
+}
+
+*:empty::before {
+  content: attr(placeholder);
+  color: var(--figma-color-text-tertiary);
+  font-style: italic;
+  font-weight: 400;
+}
+
+*:empty:focus::before  {
+  content: "";
 }
 
 .figma-dark body {
@@ -23,10 +41,7 @@
   --color-purple: #BDB0FF;
 }
 
-*:focus-visible {
-  outline: 0 solid red;
-  color: var(--figma-color-text-onselected-secondary);
-}
+
 
 span, p {
   font-size: 0.75rem;
@@ -45,6 +60,7 @@ body {
 h3 {
   /* Layout */
   align-self: stretch;
+  user-select: none;
 
   /* Typography */
   color: var(--figma-color-text);
@@ -88,3 +104,11 @@ code {
 
   border-left: 1.5px solid var(--figma-color-border);
 }
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+

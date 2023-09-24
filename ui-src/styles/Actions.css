@@ -8,6 +8,10 @@
     flex-wrap: wrap;
 }
 
+.Actions span {
+    user-select: none;
+}
+
 .Actions .Wrapper {
     /* Layout */
     display: flex;
@@ -75,17 +79,18 @@
 .columns .dropdown {
     /* Layout */
     padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+    cursor: pointer;
 }
 
 .columns .next {
     /* Layout */
     padding: 0.25rem 0.5rem;
+    cursor: pointer;
 }
 
 .Actions .remove_wrapper {
     /* Layout */
     display: flex;
-    padding: 0.4375rem;
     justify-content: center;
     align-items: center;
     gap: 0.25rem;

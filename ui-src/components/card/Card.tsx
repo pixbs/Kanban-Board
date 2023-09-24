@@ -1,7 +1,19 @@
-import React, { useState } from "react"
+import React, { useState, createContext } from "react"
 import { BaseUser, CardProps } from '../../interfaces/props'
 import { Title, Actions, Description, LinkedDesign } from "./index"
 import "../../styles/Card.css"
+
+export const CardContext = createContext<{
+    card: CardProps, 
+    users: BaseUser[], 
+    columns: string[]
+}>
+    ({
+        card: {} as CardProps, 
+        users: [], 
+        columns: []
+    })
+
 function Card() {
     
     const [card, setCard] = useState<CardProps>({} as CardProps)
@@ -9,9 +21,6 @@ function Card() {
     const [columns, setColumns] = useState<string[]>([])
     
     const borderStyles = ['orange_border','blue_border','green_border']
-    
-    const columnColors = ['FCCC88', '8CD0FD', '8DE2BE']
-
 
     onmessage = (event) => {
         const message = event.data.pluginMessage
@@ -45,12 +54,20 @@ function Card() {
     }
 
     return (
-        <div className={`card ${borderStyles[card.columnIndex ? card.columnIndex : 0]}`}>
-            <Title onUpdate={handleUpdate} name={card.name}/>
-            <Actions onMove={handleMove} onRemove={handleRemove} onUpdate={handleUpdate} columnIndex={card.columnIndex} columns={columns} date={card.date} assignee={card.assignee}/>
-            <Description description={card.description}/>
-            <LinkedDesign {...card.node}/>
-        </div>
+        <CardContext.Provider value={
+            {
+                card: card,
+                users: users,
+                columns: columns
+            }
+        }>
+            <div className={`card ${borderStyles[card.columnIndex ? card.columnIndex : 0]}`}>
+                <Title onUpdate={handleUpdate} name={card.name}/>
+                <Actions onMove={handleMove} onRemove={handleRemove} onUpdate={handleUpdate} columnIndex={card.columnIndex} columns={columns} date={card.date} assignee={card.assignee}/>
+                <Description onUpdate={handleUpdate} description={card.description}/>
+                <LinkedDesign {...card.node}/>
+            </div>
+        </CardContext.Provider>
     )
 }
 

@@ -40,7 +40,6 @@ const Card = (card : CardProps) => {
             figma.ui.postMessage({type: 'card', content: card})
             figma.ui.postMessage({type: 'users', content: users})
             figma.ui.postMessage({type: 'columns', content: columns})
-            
         })
     }
 

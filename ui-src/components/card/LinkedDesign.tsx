@@ -13,7 +13,7 @@ function LinkedDesign(node : Partial<NodeProps>) {
                 <div className='link_group fill'>
                     <div className='link_wrapper fill'>
                         <TypeIcon type={node.type} />
-                        <span className='fill'>{node.name}</span>
+                        <span className='text-overflow fill'>{node.name}</span>
                     </div>
                     <div className='link_wrapper'>
                         <NextIcon />
