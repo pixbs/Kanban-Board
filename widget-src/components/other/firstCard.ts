@@ -2,18 +2,13 @@ const { widget } = figma
 const { useWidgetNodeId } = widget
 import { CardProps, NodeProps } from "../../interfaces/props"
 
-const properties = {month: '2-digit', day: '2-digit', year: 'numeric' as const}
-
-const nameDate = new Date().toLocaleDateString("en-US", {month: 'short', day: '2-digit'})
-const usDate = new Date().toLocaleDateString("de-DE", properties as any)
-const krDate = new Date().toLocaleDateString("ko-KR", properties as any)
-const isoDate = new Date().toISOString().slice(0, 10)
+const properties = {month: '2-digit', day: '2-digit', year: 'numeric' as const};
 
 const Description : string = `
 Thanks for adding this widget!
 - You can change card name by clicking on the title.\n
 - Change status by dropdown or arrow button\n
-- Specify date by any format as (${nameDate} / ${usDate} / ${krDate} / ${isoDate}) and many else options\n
+- Specify date by any format as (Sep 25 / 25.09.2023 / 2023. 09. 25. / 2023-09-25) and many else options\n
 - You can assign user from list of people who interacted with the widget\n
 - Change description\n
 - And link any object from your file, just select 1 object and click on the button bellow\n
@@ -38,7 +33,7 @@ const firstCard : CardProps = {
     id: '',
     name: 'Welcome to Kanban!\n Click here to open the card',
     description: Description,
-    date : nameDate,
+    date : 'Sep 25',
     node: widgetNode,
     assignee: assignee,
 }
