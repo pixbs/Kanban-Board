@@ -54,16 +54,12 @@ function Widget() {
 
     function changeTheme(propertyValue? : string) {
         if(!propertyValue) return
-
-        console.log(propertyValue)
         setThemeOption(propertyValue)
         setTheme(themes[propertyValue as keyof typeof themes])
     }
 
     function changeSize(propertyValue? : string) {
         if(!propertyValue) return
-
-        console.log(propertyValue)
         setSizeOption(propertyValue)
         setUnit(sizes[propertyValue as keyof typeof sizes])
     }

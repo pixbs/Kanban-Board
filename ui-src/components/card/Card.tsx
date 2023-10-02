@@ -54,7 +54,6 @@ function Card() {
 
     const handleUpdate = (cardProp : Partial<CardProps>) => {
         const newCard = {...card, ...cardProp}
-        console.log(newCard)
         setCard(newCard)
         parent.postMessage({ pluginMessage: { type: 'update', card: newCard } }, '*')
     }
