@@ -1,0 +1,81 @@
+.datepicker {
+    position: absolute;
+    z-index: 99;
+    right: -1.5;
+    top: 2rem;
+    width: 16rem;
+    border-radius: 0.125rem;
+    background-color: var(--figma-color-bg);
+    border: 1.5px solid var(--figma-color-border);
+    padding: 0.25rem;
+}
+
+.datepicker-header {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    gap: 0.125rem;
+}
+
+.datepicker-header h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.datepicker-content {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.125rem;
+}
+
+.datepicker-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .256rem 0;
+    border-top: 1.5px solid var(--figma-color-border);
+}
+
+.datepicker-day {
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+}
+
+.datepicker-day-selected {
+    background-color: var(--figma-color-bg-selected);
+    color: var(--color-white);
+}
+
+.datepicker-day:not(.datepicker-day-selected):hover {
+    background-color: var(--figma-color-bg-hover);
+    color: var(--color-white);
+}
+
+.tertiary-button {
+    display: flex;
+    padding: 0.25rem 1rem;
+    align-items: center;
+    border-radius: 0.125rem;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.tertiary-button:hover {
+    background-color: var(--figma-color-bg-hover);
+}
+
+.tertiary-button:active {
+    background-color: var(--figma-color-bg-active);
+}
+
+.tertiary-icon-button {
+    display: flex;
+    align-items: center;
+    border-radius: 0.125rem;
+    justify-content: center;
+    aspect-ratio: 1;
+}
