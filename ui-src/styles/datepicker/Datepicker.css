@@ -1,13 +1,19 @@
 .datepicker {
     position: absolute;
     z-index: 99;
-    right: -1.5;
+    right: 50%;
     top: 2rem;
     width: 16rem;
     border-radius: 0.125rem;
     background-color: var(--figma-color-bg);
     border: 1.5px solid var(--figma-color-border);
     padding: 0.25rem;
+    transform: translate(50%);
+}
+
+.datepicker h3:hover {
+    cursor: pointer;
+    background-color: var(--figma-color-bg-hover);
 }
 
 .datepicker-header {
@@ -24,8 +30,15 @@
 
 .datepicker-content {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
     gap: 0.125rem;
+}
+
+.datepicker .day {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.datepicker .month {
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .datepicker-footer {
@@ -34,6 +47,7 @@
     justify-content: space-between;
     padding: .256rem 0;
     border-top: 1.5px solid var(--figma-color-border);
+    margin-top: 0.25rem;
 }
 
 .datepicker-day {
@@ -42,6 +56,8 @@
     align-items: center;
     justify-content: center;
     aspect-ratio: 1;
+
+    cursor: pointer;
 }
 
 .datepicker-day-selected {

@@ -1,7 +1,11 @@
 import { NodeProps } from "../interfaces/props";
 
 
-function ShowNode(Node : NodeProps) {
+function ShowNode(Node : NodeProps | undefined) {
+    if (!Node) {
+        figma.notify("Please link a node to this card first.");
+        return;
+    }
     const page = figma.getNodeById(Node.pageId) as PageNode;
     figma.currentPage = page;
 

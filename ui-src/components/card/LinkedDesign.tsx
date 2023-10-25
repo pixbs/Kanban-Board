@@ -1,16 +1,20 @@
 import React, { useContext } from 'react';
-import { LinkIcon, NextIcon } from '../icons/Icons';
+import { LargeNextIcon, LinkIcon, NextIcon, UnlinkIcon } from '../icons/Icons';
 import '../../styles/LinkedDesign.css'
 import TypeIcon from '../icons/TypeIcon';
 import { CardContext } from './Card';
 
 function LinkedDesign() {
-    const {card} = useContext(CardContext)
+    const {card, update} = useContext(CardContext)
 
     const node = card.node
 
     const handleLink = () => {
         parent.postMessage({ pluginMessage: { type: 'link', card: card } }, '*')
+    }
+
+    const handleUnlink = () => {
+        update({node: undefined})
     }
 
     const handleOpen = () => {
@@ -27,13 +31,16 @@ function LinkedDesign() {
                         <TypeIcon type={node?.type} />
                         <span 
                             className='text-overflow fill'
-                            placeholder='Click here to link selected object'
+                            placeholder='Click here to link object'
                         >
                             {node?.name}
                         </span>
                     </div>
-                    <div className='link_wrapper' onClick={handleOpen}>
-                        <NextIcon />
+                    <div className='link_wrapper icon-button' onClick={handleUnlink}>
+                        <UnlinkIcon />
+                    </div>
+                    <div className='link_wrapper icon-button' onClick={handleOpen}>
+                        <LargeNextIcon />
                     </div>
                 </div>
             </div>

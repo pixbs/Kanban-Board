@@ -28,6 +28,7 @@ const Board = () => {
                     break
                 case 'open':
                     ShowNode(msg.card.node)
+                    break
             }
         }
     })
@@ -74,8 +75,12 @@ const Board = () => {
     }
 
     const updateLink = (card : CardProps) => {
+        if (figma.currentPage.selection.length === 0) {
+            figma.notify('Please select an object first.')
+            return
+        }
         if (figma.currentPage.selection.length !== 1) {
-            console.log('Please select one object')
+            figma.notify('You can only select one object.')
             return
         }
         const node : NodeProps = {

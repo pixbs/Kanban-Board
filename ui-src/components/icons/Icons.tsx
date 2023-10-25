@@ -37,6 +37,14 @@ export const LinkIcon = () => {
     )
 }
 
+export const UnlinkIcon = () => {
+    return (
+        <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.43 14.57H21M14.57 21v-2.57M19.39 19.39l-1.93-1.93M5.57 9.43H3M9.43 3v2.57M4.61 4.61l1.93 1.93M12.643 16.013l-2.133 2.133a3.237 3.237 0 0 1-4.578 0v0a3.237 3.237 0 0 1 0-4.578l2.133-2.133M11.412 8.01l2.133-2.133a3.237 3.237 0 0 1 4.578 0v0a3.237 3.237 0 0 1 0 4.578l-2.133 2.133" stroke={color} stroke-width="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+    )
+}
+
 export const CaretDownIcon = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 16 16">
@@ -49,6 +57,14 @@ export const NextIcon = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 16 16">
         <path stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12.667 8H3.333M9.333 11.333 12.667 8M9.333 4.667 12.667 8"/>
+        </svg>
+    )
+}
+
+export const LargeNextIcon = () => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" viewBox="0 0 24 24">
+        <path stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M18 12H6M13 16.333 18 12M13 7.667 18 12"/>
         </svg>
     )
 }

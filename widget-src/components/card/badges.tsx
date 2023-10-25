@@ -2,6 +2,7 @@ const { widget } = figma
 const { AutoLayout, Text, useSyncedState, Image, Rectangle } = widget
 import { CardProps, NodeProps } from "../../interfaces/props"
 import { theme } from "../../interfaces/types"
+import formatDate from "../../utils/formatDate"
 import ShowNode from "../../utils/showNode"
 import { DescriptionIcon, LeftChevronIcon, TimeIcon } from "../icons/icons"
 import TypeIcon from "../icons/typeIcons"
@@ -106,7 +107,7 @@ const Badges = (card : CardProps) => {
             ShowNode(node)
         }
 
-        const tooltip = `Linked to ${JSON.stringify(node)}`
+        const tooltip = `Linked to ${node.name}`
 
         const localBadgeWrapperStyle : AutoLayoutProps = {
             ...badgeWrapperStyle,
@@ -170,7 +171,7 @@ const Badges = (card : CardProps) => {
         return (
             <AutoLayout {...localBadgeWrapperStyle}>
                 <TimeIcon {...iconStyle}/>
-                <Text {...textStyle}>{date}</Text>
+                <Text {...textStyle}>{formatDate(date)}</Text>
             </AutoLayout>
         )
     }

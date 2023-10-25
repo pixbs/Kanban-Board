@@ -28,6 +28,15 @@
     cursor: pointer;
 }
 
+.icon-button {
+    /* Layout */
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+
+    /* Style */
+}
+
 .link_wrapper:hover {
     background-color: var(--figma-color-bg-hover);
 }
