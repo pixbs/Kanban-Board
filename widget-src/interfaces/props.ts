@@ -13,6 +13,8 @@ export interface CardProps {
     assignee?: BaseUser
     node?: NodeProps
     columnIndex?: number
+    position?: number
+    posLength?: number
 }
 
 export interface ColumnProps {

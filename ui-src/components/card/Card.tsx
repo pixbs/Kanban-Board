@@ -10,6 +10,7 @@ export const CardContext = createContext<{
     move: (index: number) => void
     remove: () => void
     update: (card: Partial<CardProps>) => void
+    position: (index: number) => void
 }>
     ({
         card: {} as CardProps, 
@@ -17,7 +18,8 @@ export const CardContext = createContext<{
         columns: [],
         move: (index: number) => {throw new Error('Move function was not assigned')},
         remove: () => {throw new Error('Remove function was not assigned')},
-        update: (card: Partial<CardProps>) => {throw new Error('Update function was not assigned')}
+        update: (card: Partial<CardProps>) => {throw new Error('Update function was not assigned')},
+        position: (index: number) => {throw new Error('Position function was not assigned')}
     })
 
 function Card() {
@@ -40,11 +42,14 @@ function Card() {
             case 'columns':
                 setColumns(message.content)
                 break;
+            case 'posLenght':
+                setCard({...card, posLength: message.content})
+                break;
         }
     }
 
     const handleMove = (index : number) => {
-        setCard({...card, columnIndex: index})
+        setCard({...card, columnIndex: index, position: 0})
         parent.postMessage({ pluginMessage: { type: 'move', content: index, card: card } }, '*')
     }
 
@@ -58,6 +63,11 @@ function Card() {
         parent.postMessage({ pluginMessage: { type: 'update', card: newCard } }, '*')
     }
 
+    const handlePosition = (index : number) => {
+        setCard({...card, position: index})
+        parent.postMessage({ pluginMessage: { type: 'position', content: index, card: card } }, '*')
+    }
+
     return (
         <CardContext.Provider value={
             {
@@ -66,7 +76,8 @@ function Card() {
                 columns: columns,
                 move: handleMove,
                 remove: handleRemove,
-                update: handleUpdate
+                update: handleUpdate,
+                position: handlePosition
             }
         }>
             <div className={`card ${borderStyles[card.columnIndex ? card.columnIndex : 0]}`}>

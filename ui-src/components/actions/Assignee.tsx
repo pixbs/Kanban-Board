@@ -9,9 +9,7 @@ function Assignee() {
     const {card, users} = useContext(CardContext)
 
     const [display, setDisplay] = useState(false)
-
-    console.log(JSON.stringify(users))
-
+    
     const image = card.assignee?.photoUrl ? 
         <img className="userpic" src={card.assignee.photoUrl} alt='Assignee'/> :
         <UserIcon />

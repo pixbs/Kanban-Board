@@ -29,6 +29,9 @@ const Board = () => {
                 case 'open':
                     ShowNode(msg.card.node)
                     break
+                case 'position':
+                    movePosition(msg.content, msg.card)
+                    break
             }
         }
     })
@@ -55,6 +58,20 @@ const Board = () => {
         newColumns[cardLocation.columns].cards.splice(cardLocation.cards, 1)
         newColumns[index].cards.unshift(card)
         setColumns(newColumns)
+        updatePositions()
+        figma.ui.postMessage({type: 'posLenght', content: newColumns[index].cards.length})
+    }
+
+    const movePosition = (index : number, card : CardProps) => {
+        if(index === card.position) return
+        const cardLocation = findCard(card.id)
+        if(!cardLocation) return
+        if(!card.posLength || index > card.posLength-1) return
+        const newColumns = [...columns]
+        newColumns[cardLocation.columns].cards.splice(cardLocation.cards, 1)
+        newColumns[cardLocation.columns].cards.splice(index, 0, card)
+        setColumns(newColumns)
+        updatePositions()
     }
 
     const removeCard = (card : CardProps) => {
@@ -63,6 +80,7 @@ const Board = () => {
         const newColumns = [...columns]
         newColumns[cardLocation.columns].cards.splice(cardLocation.cards, 1)
         setColumns(newColumns)
+        updatePositions()
     }
 
     const updateCard = (card : CardProps) => {
@@ -97,19 +115,28 @@ const Board = () => {
         if(!columns) return
         setCardCount(cardCount+1)
         card.id = `card-${cardCount}`
-        // card.node = {     
-        //     name: figma.getNodeById(widgetId)?.name || '',
-        //     id: figma.getNodeById(widgetId)?.id || '',
-        //     type: figma.getNodeById(widgetId)?.type || '',
-        // }
+        card.posLength = column.cards.length
         const newColumns = [...columns]
         for (let i = 0; i < newColumns.length; i++) {
             if(newColumns[i].name === column.name) {
                 newColumns[i].cards.unshift(card)
                 setColumns(newColumns)
+                updatePositions()
                 return
             }
         }
+    }
+
+    const updatePositions = () => {
+        if(!columns) return
+        const newColumns = [...columns]
+        for (let i = 0; i < newColumns.length; i++) {
+            newColumns[i].cards.map((card, index) => {
+                card.posLength = newColumns[i].cards.length
+                card.position = index
+            })
+        }
+        setColumns(newColumns)
     }
 
     const initialColumns: ColumnProps[] = [

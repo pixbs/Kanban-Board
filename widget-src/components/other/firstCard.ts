@@ -8,7 +8,6 @@ const Description : string = `
 Thanks for adding this widget!
 - You can change card name by clicking on the title.\n
 - Change status by dropdown or arrow button\n
-- Specify date by any format as (Sep 25 / 25.09.2023 / 2023. 09. 25. / 2023-09-25) and many else options\n
 - You can assign user from list of people who interacted with the widget\n
 - Change description\n
 - And link any object from your file, just select 1 object and click on the button bellow\n
@@ -31,9 +30,9 @@ const assignee : BaseUser = {
 
 const firstCard : CardProps = {
     id: '',
-    name: 'Welcome to Kanban!\n Click here to open the card',
+    name: 'Welcome to Kanban! \nClick here to open the card',
     description: Description,
-    date : 'Sep 25',
+    date : 'Oct 26, 2023',
     node: widgetNode,
     assignee: assignee,
 }
